@@ -1,0 +1,9 @@
+This is a log of all minor events that have occured within the Capstone Project so far.  As such,
+this log is not designed for the end customer, but stands as a milestone within milestones to show
+the dedication it took to go about a project of this scope.
+
+1/28/20
+	Steven and I focused our attention on the process of making sure that we understood how Git worked.
+	While I initially thought it would be uneventful, it proved to be a tad time consuming as I had
+	forgot to fetch and pull properly, leading to merge errors.  Once we had figured those out, we both
+	managed to figure it all out and come up with a system in order to prevent merge issues.
