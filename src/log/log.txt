@@ -14,3 +14,10 @@ the dedication it took to go about a project of this scope.
 	about to really get started.  I am planning on joining back up with him on Monday once we've touched
 	bases with Professor Moreno.  Right now, it all looks as though things are going to go smoothly now that
 	we've managed to get everything up to speed.
+
+2/3/20
+	Steven and I met with the professor to submit our first progress report.  So far, we are both up to speed
+	and are able to begin working on our project.  We have plans to start and finish the window component before
+	Friday the 14th.  I have plans on how to implement this, but we should be able to get this almost totally
+	complete by then.  I am able to implement a whole working window for an engine in about 2 hours, so we
+	should be totally prepared come Friday.
