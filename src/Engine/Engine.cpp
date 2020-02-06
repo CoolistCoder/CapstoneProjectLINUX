@@ -136,7 +136,11 @@ void Engine::setSize(unsigned int w, unsigned int h){
 }
 
 void Engine::setName(std::string newname){
-	//TODO implement the setname
+	//make sure the newname variable is not empty before setting the window's title!!!
+	if (!newname.empty()){
+		//we can again, use a simple function to set the title of the window
+		SDL_SetWindowTitle(this->window, newname.c_str());
+	}
 }
 
 void Engine::setFPS(unsigned int newFPS){
