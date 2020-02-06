@@ -125,15 +125,18 @@ void Engine::drawScreen(){
 }
 
 void Engine::setPosition(unsigned int x, unsigned int y){
-
+	//SDL contains simple functions for modifying the window's properties
+	SDL_SetWindowPosition(this->window, x, y);
+	//these are extremely simple, and are based on the pixel position of a window's border
 }
 
 void Engine::setSize(unsigned int w, unsigned int h){
-
+	//like the previous position function, we can do the same with the size
+	SDL_SetWindowSize(this->window, w, h);
 }
 
 void Engine::setName(std::string newname){
-
+	//TODO implement the setname
 }
 
 void Engine::setFPS(unsigned int newFPS){

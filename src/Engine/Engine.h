@@ -12,6 +12,8 @@ private:
 	SDL_GLContext context;	//the opengl context of the window
 	unsigned int framerate;	//the rate at which the window updates in seconds
 
+	void recalcRenderer();	//this is to resize the renderer dynamically so the picture isn't stretched
+
 public:
 	void init();	//sets up the engine in order for it to run properly
 	void end();	//cleans up all components created by the engine
