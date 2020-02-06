@@ -54,7 +54,24 @@ void Engine::init(){
 }
 
 void Engine::end(){
-
+	//this occurs at the end of the engine's run
+	//once finished, the engine needs to be able to free all of its elements
+	//first, clear out the context
+	if (this->context){
+		//if the context is not empty, we need to clean it out
+		SDL_GL_DeleteContext(this->context);
+		//this function deletes the active context
+	}
+	//now we can delete the window
+	if (this->window){
+		//we can't just delete this however, we need a special function to clear it out
+		SDL_DestroyWindow(this->window);
+		//this function will clear out the window and all of its properties without causing leaks
+	}
+	//finally, we may implement the quit function
+	SDL_Quit();
+	//this function will close any resources that SDL uses
+	//this will finish up the exit process, and the program will quit without any leaks
 }
 
 void Engine::makeWindow(unsigned int w, unsigned int h, std::string title){
