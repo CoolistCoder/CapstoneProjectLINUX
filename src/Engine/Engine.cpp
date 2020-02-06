@@ -75,6 +75,35 @@ void Engine::end(){
 }
 
 void Engine::makeWindow(unsigned int w, unsigned int h, std::string title){
+	if (this->success){ //we only want to create a window if we can successfully initialize the engine!
+		//now, the window needs to be initialized
+		//we need to use a particular function to achieve this
+		this->window = SDL_CreateWindow( //this function will properly set the window's properties
+			title.c_str(),	//because the library was written in C, the title must be converted to a c string
+			SDL_WINDOWPOS_CENTERED, //we want the window to appear in the center of the screen horizontally
+			SDL_WINDOWPOS_CENTERED,	//we also want the window to appear in the center of the screen vertically
+			w,						//we want the window to be set to the specified width
+			h,						//as well as a specified height
+			SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE	//finally, we need the window to be our OpenGL target, and we want to resize it
+		);
+		//we must check to see if this was done correctly, otherwise we cannot complete the window init
+		if (!this->window){
+			//we must check to see if the window is empty
+			//if it is, then we display a messagebox like before
+			SDL_ShowSimpleMessageBox(
+				SDL_MESSAGEBOX_ERROR,			//the messagebox is an error box
+				"ERROR",						//the title
+				"COULD NOT CREATE THE WINDOW",	//the description telling us that the window init was a failure
+				nullptr							//we still don't have a window to use, so nullptr
+			);
+			return;	//we need to leave this process before anything else happens
+		}
+		else{
+			//if the window was properly initialized, we can call the opengl setup function, which preps
+			//the window for OpenGL
+			this->setGLDefaults();	//this will properly set up the window so we can use it for OpenGL
+		}
+	}
 
 }
 
