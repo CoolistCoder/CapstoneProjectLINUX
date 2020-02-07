@@ -21,3 +21,9 @@ the dedication it took to go about a project of this scope.
 	Friday the 14th.  I have plans on how to implement this, but we should be able to get this almost totally
 	complete by then.  I am able to implement a whole working window for an engine in about 2 hours, so we
 	should be totally prepared come Friday.
+	
+2/6/20
+	Managed to apply almost all of the OpenGL initialization calls needed to make the engine work.  This was a
+	big task that required a lot of reworking old conceptions I had about OpenGL, but if all goes well then
+	the engine is prepped to draw 2D.  All I need to do is add additional features like input among other things
+	so that the engine can really get going.  

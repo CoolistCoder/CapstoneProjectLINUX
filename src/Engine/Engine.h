@@ -4,6 +4,9 @@
 #include <SDL2/SDL_image.h> //SDL is included in here, containing everything needed to handle the window and load graphics
 #include <SDL2/SDL_mixer.h>	//the library needed to load music and sound properly
 
+#include <GL/gl.h>
+#include <GL/glu.h>
+
 class Engine {
 private:
 	bool isrunning; //determines whether the window is still active
@@ -11,6 +14,7 @@ private:
 	SDL_Window* window;	//the window all entities are sent to
 	SDL_GLContext context;	//the opengl context of the window
 	unsigned int framerate;	//the rate at which the window updates in seconds
+	Uint32 firsttick;	//the first tick of the loop (used for updating the screen)
 
 	void recalcRenderer();	//this is to resize the renderer dynamically so the picture isn't stretched
 
