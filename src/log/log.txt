@@ -27,3 +27,9 @@ the dedication it took to go about a project of this scope.
 	big task that required a lot of reworking old conceptions I had about OpenGL, but if all goes well then
 	the engine is prepped to draw 2D.  All I need to do is add additional features like input among other things
 	so that the engine can really get going.  
+	
+2/10/20
+	Steven was feeling under the weather for the past few days, so we decided it'd be better if he do what he can
+	now and then recover as soon as possible.  On my end, it seems as though everything is going well and I can
+	probably finish up before Friday, with the next week or so dedicated to bugfixes.  I want to make sure that 
+	any possible issues are taken care of as soon as possible.
