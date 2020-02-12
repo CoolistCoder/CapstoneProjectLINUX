@@ -34,6 +34,8 @@ public:
 
 	void setFPS(unsigned int);	//set how many times the engine's screen updates per second
 
+	bool getKey(SDL_Scancode); //check whether a particular keyboard key is down
+
 	Engine();			//the constructor automatically calls the init routine
 	virtual ~Engine();	//the destructor destroys all of the components opened by SDL2
 };

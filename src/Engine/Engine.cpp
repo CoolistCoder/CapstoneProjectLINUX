@@ -258,6 +258,24 @@ void Engine::setFPS(unsigned int newFPS){
 	this->framerate = newFPS;
 }
 
+bool Engine::getKey(SDL_Scancode key){
+	//we need to make sure that the input value is not invalid
+	if (key >= 0 || key < 256){
+		//in order to get key input, we need an array of all of the possible keys
+		//A Uint8 is just big enough to be a candidate for this array
+		const Uint8* whichkey = SDL_GetKeyboardState(NULL);
+		//Now, whichkey is a simple array that contains all of the possible keyboard states
+		//we can use this to get the precise key we're looking for
+		if (whichkey[key]){
+			//If the key at the specified scancode is active, then we return true
+			return true;
+		}
+	}
+	//in all other circumstances, we return false for this function
+	return false;
+	//this allows us to take multiple key inputs
+}
+
 Engine::Engine() {
 	//begin by setting the defaults of everything
 	this->context = 0; //don't need the context yet

@@ -15,19 +15,32 @@ int main(int, char**) {
 	Engine* mainEng = new Engine();
 	mainEng->makeWindow(640, 480, "Hello, World!");	//create the window for the engine
 
+	//simple demonstration variables for input
+	int x = 0, y = 0;
+
 	//create the while loop for the 'game' logic
 	while(mainEng->getRunning()){
 		//until the X in the top right is clicked, it will keep updating the screen
 		mainEng->clearScreen();
 
+		//get keyboard input to move the square on the screen
+		if (mainEng->getKey(SDL_SCANCODE_DOWN))
+			y++;
+		if (mainEng->getKey(SDL_SCANCODE_UP))
+			y--;
+		if (mainEng->getKey(SDL_SCANCODE_LEFT))
+			x--;
+		if (mainEng->getKey(SDL_SCANCODE_RIGHT))
+			x++;
+
 		//create a simple square to test this
 		glMatrixMode(GL_MODELVIEW);	//change the matrix to the modelview matrix to modify objects drawn to the screen
 		glLoadIdentity();			//change the active identity to the modelview matrix
 		glBegin(GL_QUADS);			//draw quads
-			glVertex2i(0,0);		//top left
-			glVertex2i(10,0);		//bottom left
-			glVertex2i(10,10);		//bottom right
-			glVertex2i(0,10);		//top right
+			glVertex2i(x,y);		//top left
+			glVertex2i(x+10,y);		//bottom left
+			glVertex2i(x+10,y+10);		//bottom right
+			glVertex2i(x,y+10);		//top right
 		glEnd();					//stop drawing
 		//this will produce a simple square in the top left corner
 
