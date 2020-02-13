@@ -39,6 +39,14 @@ void Engine::init(){
 		return;
 	}
 
+	//due to an error in the Ubuntu version of SDL2_mixer, OpenAudio must be called first apparently
+	//this may not be necessary in the Windows version, be aware
+	Mix_OpenAudio(
+			44100, //The range of frequency that the sound is given
+			MIX_DEFAULT_FORMAT,	//use default settings when using the sound
+			2,		//we want two channels for audio
+			1024);	//the amount of bytes per sample (the higher, the clearer)
+
 	//the final step is similar to the first two steps
 	//we must initialize the mixer module
 	if (Mix_Init(MIX_INIT_FLAC | MIX_INIT_MP3 | MIX_INIT_OGG)<1){
