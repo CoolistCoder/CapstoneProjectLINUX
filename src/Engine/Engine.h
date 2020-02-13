@@ -16,6 +16,9 @@ private:
 	unsigned int framerate;	//the rate at which the window updates in seconds
 	Uint32 firsttick;	//the first tick of the loop (used for updating the screen)
 
+	unsigned int windowW, windowH;	//the width and height of the window recorded
+	unsigned int rendererW, rendererH;	//the 'renderer' is where the graphics will be adjusted to fit a specific resolution
+
 	void recalcRenderer();	//this is to resize the renderer dynamically so the picture isn't stretched
 
 public:
@@ -31,6 +34,7 @@ public:
 	void setPosition(unsigned int, unsigned int);	//set the position of the window
 	void setSize(unsigned int, unsigned int);	//set the size of the window
 	void setName(std::string);	// set the title of the window
+	void setResolution(int,int);	//adjusts the renderer's size
 
 	void setFPS(unsigned int);	//set how many times the engine's screen updates per second
 

@@ -3,8 +3,21 @@
 #include "Engine.h"
 
 void Engine::recalcRenderer(){
-	//TODO implement this
-	//side note: this is a function that implements a lot of mathematical logic so don't worry until slightly later
+	//TODO maybe improve this to scale better with the window?
+	//this function needs to adjust the renderer's size according to the height of the window
+	float ratio; //the ratio that will be calculated
+	int scaleW, scaleH; //this is the adjusted scale of the renderer
+	int currentW, currentH;	//this is the current size of the window
+
+	SDL_GetWindowSize(this->window, &currentW, &currentH); //store the size of the window in the currentW/H variables
+	ratio = (float)windowW / (float)windowH; //we need the ratio of the scene
+	scaleH = currentH; //in order for the scene to look "correct" we need an axis to scale to.  We'll use the Y axis.
+	scaleW = currentH * ratio; //as such, our width is adjusted according to the ratio
+
+	//now we need to adjust the viewport accordingly
+	//we want the viewport centered on the screen, and adjusted in scale to the scale variables
+	glViewport((currentW/2)-(scaleW/2),(currentH/2) - (scaleH/2),scaleW,scaleH);
+	//this will produce a window that scales fairly well with the window
 }
 
 void Engine::init(){
@@ -101,6 +114,12 @@ void Engine::makeWindow(unsigned int w, unsigned int h, std::string title){
 		);
 		//we must check to see if this was done correctly, otherwise we cannot complete the window init
 		if (!this->window){
+			//if we succeeded, we can give the window and renderer sizes our values
+			this->windowW = w;	//at the start, the window's size is the same as what we specify above
+			this->windowH = h;
+			this->rendererW = this->windowW; //until we change the resolution, the renderer's size is equal to the window
+			this->rendererH = this->windowH;
+
 			//we must check to see if the window is empty
 			//if it is, then we display a messagebox like before
 			SDL_ShowSimpleMessageBox(
@@ -261,6 +280,14 @@ void Engine::setName(std::string newname){
 	}
 }
 
+void Engine::setResolution(int w, int h){
+	//this can be achieved with a simple call to gluortho
+	//however, we want to make sure that we have the correct matrix mode set
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();	//load the identity of the matrix mode
+	gluOrtho2D(0,w,h,0);	//now call gluortho
+}
+
 void Engine::setFPS(unsigned int newFPS){
 	//this will simply set the FPS of the engine through the framerate variable
 	this->framerate = newFPS;
@@ -291,6 +318,11 @@ Engine::Engine() {
 	this->isrunning = false;	//the window is not running, therefore this is false for now
 	this->success = false;	//the engine has not been initialized, therefore it is not successfully initialized
 	this->framerate = 60;	//by default, the engine runs at 60 hrz
+	this->windowW = 640;	//we want to use a simple frame size as a default so we don't accidentally cause and error
+	this->windowH = 480;	//same on the window's height
+	//the renderer's size can match the window's when we start
+	this->rendererW = this->windowW;
+	this->rendererH = this->windowH;
 
 	this->init();	//perform the init after the engine's default values have been set
 
