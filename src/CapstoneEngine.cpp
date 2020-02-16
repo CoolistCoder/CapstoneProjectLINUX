@@ -29,14 +29,18 @@ int main(int, char**) {
 		mainEng->clearScreen();
 
 		//get keyboard input to move the square on the screen
-		if (testjoy.getButton(0))
+
+		if (testjoy.getPad(SDL_HAT_DOWN))
 			y++;
-		if (testjoy.getButton(3))
+		if (testjoy.getPad(SDL_HAT_UP))
 			y--;
-		if (testjoy.getButton(2))
+		if (testjoy.getPad(SDL_HAT_LEFT))
 			x--;
-		if (testjoy.getButton(1))
+		if (testjoy.getPad(SDL_HAT_RIGHT))
 			x++;
+
+
+
 
 		//create a simple square to test this
 		glMatrixMode(GL_MODELVIEW);	//change the matrix to the modelview matrix to modify objects drawn to the screen

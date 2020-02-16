@@ -10,6 +10,8 @@
 #include <SDL2/SDL_image.h>	//We only need SDL2 for this, but due to a bug we include SDL_Image instead
 //NOTE: DO NOT NEED TO DO THIS FOR WINDOWS
 
+#include <iostream>
+
 class Joystick {
 private:
 	static int totaljoysticks;	//the total number of joysticks
@@ -18,6 +20,7 @@ private:
 
 public:
 	bool getButton(int);	//Function for retrieving the button that's pushed
+	bool getPad(int); 		//Function for retrieving the current direction of the pad
 
 
 	Joystick();

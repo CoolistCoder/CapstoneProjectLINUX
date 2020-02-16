@@ -7,6 +7,13 @@ bool Joystick::getButton(int button){
 	return SDL_JoystickGetButton(this->joystick, button);
 }
 
+bool Joystick::getPad(int dir){
+	//We only need to get the direction and make sure it's true
+	if (SDL_JoystickGetHat(this->joystick, 0) == dir)
+	return true;	//if the direction of the single dpad on the joypad is pressed, we can return true
+	return false;	//otherwise it returns false
+}
+
 Joystick::Joystick() {
 	// TODO Auto-generated constructor stub
 	//first we need to set the current joystick's number to the total
