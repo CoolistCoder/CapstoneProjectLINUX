@@ -20,19 +20,22 @@ int main(int, char**) {
 	//simple demonstration variables for input
 	int x = 0, y = 0;
 
+	//SIMPLE TEST OF THE JOYSTICK
+	Joystick testjoy;
+
 	//create the while loop for the 'game' logic
 	while(mainEng->getRunning()){
 		//until the X in the top right is clicked, it will keep updating the screen
 		mainEng->clearScreen();
 
 		//get keyboard input to move the square on the screen
-		if (mainEng->getKey(SDL_SCANCODE_DOWN))
+		if (testjoy.getButton(0))
 			y++;
-		if (mainEng->getKey(SDL_SCANCODE_UP))
+		if (testjoy.getButton(3))
 			y--;
-		if (mainEng->getKey(SDL_SCANCODE_LEFT))
+		if (testjoy.getButton(2))
 			x--;
-		if (mainEng->getKey(SDL_SCANCODE_RIGHT))
+		if (testjoy.getButton(1))
 			x++;
 
 		//create a simple square to test this

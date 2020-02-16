@@ -7,6 +7,9 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+//We need the Joystick so we will include it with the engine
+#include "Joystick.h"
+
 class Engine {
 private:
 	bool isrunning; //determines whether the window is still active
