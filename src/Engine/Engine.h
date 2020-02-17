@@ -9,6 +9,7 @@
 
 //We need the Joystick so we will include it with the engine
 #include "Joystick.h"
+#include <vector> //We can use vectors for mass joystick detection among other features
 
 class Engine {
 private:
@@ -23,6 +24,10 @@ private:
 	unsigned int rendererW, rendererH;	//the 'renderer' is where the graphics will be adjusted to fit a specific resolution
 
 	void recalcRenderer();	//this is to resize the renderer dynamically so the picture isn't stretched
+
+	//This is just for detecting the joysticks that are created
+	std::vector<Joystick*> alljoysticks;
+
 
 public:
 	void init();	//sets up the engine in order for it to run properly
@@ -42,6 +47,8 @@ public:
 	void setFPS(unsigned int);	//set how many times the engine's screen updates per second
 
 	bool getKey(SDL_Scancode); //check whether a particular keyboard key is down
+
+	void addJoystick(Joystick*); //This simply adds a joystick to the engine
 
 	Engine();			//the constructor automatically calls the init routine
 	virtual ~Engine();	//the destructor destroys all of the components opened by SDL2

@@ -235,6 +235,7 @@ void Engine::clearScreen(){
 	//2) update the window's functions
 	//3) recalculate the size of the renderer
 	//4) refresh the screen
+	//5) update all of the joysticks
 	//we just need to use the variable built into the engine called firsttick, which is a 32 bit integer
 	//it just keeps track of how many ticks it takes to get from the clear to the draw
 	//this is used for updating the frames
@@ -255,6 +256,16 @@ void Engine::clearScreen(){
 	//this will clear the screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//the drawing will happen beneath this function but before the drawscreen function
+
+	//Now we need to redetect all of the joysticks
+	if (!this->alljoysticks.empty()){
+		//As long as there are joystick objects we can perform this step
+		for (int i=0;i<Joystick::getTotalJoysticks();i++){
+			//for each joystick found, we simply call the detect function
+			this->alljoysticks.at(i)->detect();
+			//this will force all of the joysticks to be detected
+		}
+	}
 }
 
 void Engine::drawScreen(){
@@ -321,6 +332,13 @@ bool Engine::getKey(SDL_Scancode key){
 	//in all other circumstances, we return false for this function
 	return false;
 	//this allows us to take multiple key inputs
+}
+
+void Engine::addJoystick(Joystick* newjoystick){
+	//as long as the new joypad is not null we can add it to the joystick vector
+	if (newjoystick){
+		this->alljoysticks.push_back(newjoystick);
+	}
 }
 
 Engine::Engine() {

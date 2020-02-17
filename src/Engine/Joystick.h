@@ -18,10 +18,22 @@ private:
 	int joynum;	//the joystick number this joystick is assigned to
 	SDL_Joystick* joystick;	//this is the joystick structure we need
 
+	//these functions update the left and right sticks on a standard xinput controller
+	int leftjoyX, leftjoyY; //this is where the information on the left joystick will be kept
+	int rightjoyX, rightjoyY;	//this is where the information on the right joystick will be kept
+
+	void updateSticks();	//this updates the stick positions
+
 public:
 	bool getButton(int);	//Function for retrieving the button that's pushed
 	bool getPad(int); 		//Function for retrieving the current direction of the pad
+	int getLeftStickX();	//Function for getting hte position of the left stick's X position
+	int getLeftStickY();	//Function for getting hte position of the left stick's Y position
+	int getRightStickX();	//Function for getting hte position of the right stick's X position
+	int getRightStickY();	//Function for getting hte position of the right stick's Y position
 
+	void detect();	//this simply finds the joystick again if it was removed
+	static int getTotalJoysticks();	//this returns how many total joysticks were instanciated
 
 	Joystick();
 	virtual ~Joystick();
