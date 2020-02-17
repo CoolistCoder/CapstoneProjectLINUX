@@ -44,6 +44,9 @@ public:
 	void setName(std::string);	// set the title of the window
 	void setResolution(int,int);	//adjusts the renderer's size
 
+	void maximizeWindow();	//maximizes the window to the size of the monitor
+	void restoreWindow();	//puts the window back where it was prior to maximization
+
 	void setFPS(unsigned int);	//set how many times the engine's screen updates per second
 
 	bool getKey(SDL_Scancode); //check whether a particular keyboard key is down

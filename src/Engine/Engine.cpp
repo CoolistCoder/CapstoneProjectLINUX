@@ -94,7 +94,10 @@ void Engine::init(){
 void Engine::end(){
 	//this occurs at the end of the engine's run
 	//once finished, the engine needs to be able to free all of its elements
-	//first, clear out the context
+	//Close open audio channels
+	Mix_CloseAudio();
+
+	//clear out the context
 	if (this->context){
 		//if the context is not empty, we need to clean it out
 		SDL_GL_DeleteContext(this->context);
@@ -106,7 +109,9 @@ void Engine::end(){
 		SDL_DestroyWindow(this->window);
 		//this function will clear out the window and all of its properties without causing leaks
 	}
-	//finally, we may implement the quit function
+	//finally, we may implement the quit functions
+	Mix_Quit();
+	IMG_Quit();
 	SDL_Quit();
 	//this function will close any resources that SDL uses
 	//this will finish up the exit process, and the program will quit without any leaks
