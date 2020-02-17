@@ -10,7 +10,7 @@ void Engine::recalcRenderer(){
 	int currentW, currentH;	//this is the current size of the window
 
 	SDL_GetWindowSize(this->window, &currentW, &currentH); //store the size of the window in the currentW/H variables
-	ratio = (float)windowW / (float)windowH; //we need the ratio of the scene
+	ratio = (float)this->windowW / (float)this->windowH; //we need the ratio of the scene
 	scaleH = currentH; //in order for the scene to look "correct" we need an axis to scale to.  We'll use the Y axis.
 	scaleW = currentH * ratio; //as such, our width is adjusted according to the ratio
 
