@@ -46,6 +46,10 @@ public:
 
 	void maximizeWindow();	//maximizes the window to the size of the monitor
 	void restoreWindow();	//puts the window back where it was prior to maximization
+	void fullscreenWindow();	//this fullscreens the window
+	void normalscreenWindow();	//this will put the window back to its original size and position
+
+	void stop();	//this will cause the isrunning variable to become false
 
 	void setFPS(unsigned int);	//set how many times the engine's screen updates per second
 

@@ -22,7 +22,10 @@ int main(int, char**) {
 
 	//SIMPLE TEST OF THE JOYSTICK
 	Joystick testjoy;
-	mainEng->addJoystick(&testjoy); //now add the joystick
+	mainEng->addJoystick(&testjoy); //now add the joystick to the engine
+
+	//Now fullscreen the window
+	mainEng->fullscreenWindow();
 
 	//create the while loop for the 'game' logic
 	while(mainEng->getRunning()){
@@ -39,6 +42,10 @@ int main(int, char**) {
 		if (testjoy.getRightStickX() > 100)
 			x++;
 
+		//set up an exit key
+		if (mainEng->getKey(SDL_SCANCODE_ESCAPE)){
+			mainEng->stop();
+		}
 
 
 

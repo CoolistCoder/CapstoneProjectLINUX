@@ -316,6 +316,33 @@ void Engine::setResolution(int w, int h){
 	gluOrtho2D(0,w,h,0);	//now call gluortho
 }
 
+void Engine::maximizeWindow(){
+	//All this will do is maximize the game's window to the screen
+	SDL_MaximizeWindow(this->window);
+}
+
+void Engine::restoreWindow(){
+	//this will set the scale of the window back to normal
+	SDL_RestoreWindow(this->window);
+}
+
+void Engine::fullscreenWindow(){
+	//this will set the window to fullscreen
+	SDL_SetWindowFullscreen(this->window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	//keep in mind this is a maximized borderless window
+}
+
+void Engine::normalscreenWindow(){
+	//this will return the window from fullscreen
+	SDL_SetWindowFullscreen(this->window, 0);
+}
+
+void Engine::stop(){
+	//set isrunning to false
+	this->isrunning = false;
+	//this will kill any typical loop
+}
+
 void Engine::setFPS(unsigned int newFPS){
 	//this will simply set the FPS of the engine through the framerate variable
 	this->framerate = newFPS;
