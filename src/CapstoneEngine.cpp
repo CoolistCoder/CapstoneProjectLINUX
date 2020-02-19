@@ -25,7 +25,20 @@ int main(int, char**) {
 	mainEng->addJoystick(&testjoy); //now add the joystick to the engine
 
 	//Now fullscreen the window
-	mainEng->fullscreenWindow();
+	//mainEng->fullscreenWindow();
+
+	//TODO This is a test of the audio so we don't need it until the next milestone
+	//This is our code for testing audio
+	Mix_Music* musicdata = nullptr; //We load in our music data to a pointer
+	musicdata = Mix_LoadMUS("robomb.wav");	//load in the music (in this case a WAV created by me)
+	if (!musicdata){	//if the music data was not found, we can display a message in the terminal for now
+		cout << "could not find music" << endl;
+	}
+	Mix_VolumeMusic(50);	//lower the volume a bit, it's quite loud!
+
+
+
+
 
 	//create the while loop for the 'game' logic
 	while(mainEng->getRunning()){
@@ -47,6 +60,9 @@ int main(int, char**) {
 			mainEng->stop();
 		}
 
+		//We might wanna play the music here
+		if (!Mix_PlayingMusic())	//This will cause the music to loop
+			Mix_PlayMusic(musicdata, 0);
 
 
 		//create a simple square to test this
@@ -61,6 +77,11 @@ int main(int, char**) {
 		//this will produce a simple square in the top left corner
 
 		mainEng->drawScreen();
+	}
+
+	//we can delete the music now that we're done with it
+	if (musicdata){
+		Mix_FreeMusic(musicdata); //because of the nature of the file, we need a specific function to free it
 	}
 
 	//clean up the engine (this will clean it up on its own)
