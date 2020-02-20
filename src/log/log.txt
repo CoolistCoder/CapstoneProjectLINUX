@@ -33,3 +33,9 @@ the dedication it took to go about a project of this scope.
 	now and then recover as soon as possible.  On my end, it seems as though everything is going well and I can
 	probably finish up before Friday, with the next week or so dedicated to bugfixes.  I want to make sure that 
 	any possible issues are taken care of as soon as possible.
+	
+2/19/20
+	I had contracted my own illness and had been under the weather for a good week, long enough for my illness to
+	affect my work.  However, I have managed to implement as much as I needed to and maybe a little more.  I am
+	currently preparing for the first milestone, and Steven is catching up with my work very well.  We may be
+	able to present a small report of our research.
