@@ -42,7 +42,7 @@
 									<listOptionValue builtIn="false" value="GL"/>
 									<listOptionValue builtIn="false" value="GLU"/>
 								</option>
-								<option id="gnu.cpp.link.option.flags.2097926739" superClass="gnu.cpp.link.option.flags" useByScannerDiscovery="false" value="--no-pie" valueType="string"/>
+								<option id="gnu.cpp.link.option.flags.2097926739" name="Linker flags" superClass="gnu.cpp.link.option.flags" useByScannerDiscovery="false" value="-no-pie" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.684574508" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
