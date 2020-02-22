@@ -289,15 +289,16 @@ void Engine::drawScreen(){
 	SDL_GL_SwapWindow(this->window);
 }
 
-void Engine::setPosition(unsigned int x, unsigned int y){
+void Engine::setPosition(int x, int y){
 	//SDL contains simple functions for modifying the window's properties
 	SDL_SetWindowPosition(this->window, x, y);
-	//these are extremely simple, and are based on the pixel position of a window's border
+	//these are extremely simple, and are based on the pixel position of a window's top left corner
 }
 
 void Engine::setSize(unsigned int w, unsigned int h){
 	//like the previous position function, we can do the same with the size
 	SDL_SetWindowSize(this->window, w, h);
+	//an unsigned int cannot be negative, so inherently this would work
 }
 
 void Engine::setName(std::string newname){
@@ -314,6 +315,7 @@ void Engine::setResolution(int w, int h){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//load the identity of the matrix mode
 	gluOrtho2D(0,w,h,0);	//now call gluortho
+	//Being able to set the resolution within the window is intended behavior, even if it's much larger
 }
 
 void Engine::maximizeWindow(){
@@ -346,6 +348,7 @@ void Engine::stop(){
 void Engine::setFPS(unsigned int newFPS){
 	//this will simply set the FPS of the engine through the framerate variable
 	this->framerate = newFPS;
+	//Because this is an unsigned int, it cannot be negative, so this will prevent any negative values by design
 }
 
 bool Engine::getKey(SDL_Scancode key){

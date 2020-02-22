@@ -39,7 +39,7 @@ public:
 	void clearScreen();	//clear the screen of all graphics
 	void drawScreen();	//draw all graphics to the screen
 
-	void setPosition(unsigned int, unsigned int);	//set the position of the window
+	void setPosition(int, int);	//set the position of the window
 	void setSize(unsigned int, unsigned int);	//set the size of the window
 	void setName(std::string);	// set the title of the window
 	void setResolution(int,int);	//adjusts the renderer's size

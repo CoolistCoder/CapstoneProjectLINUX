@@ -46,13 +46,13 @@ int main(int, char**) {
 		mainEng->clearScreen();
 
 		//get joystick input to move the square on the screen
-		if (testjoy.getRightStickY() > 100)
+		if (testjoy.getRightStickY() > 100 || mainEng->getKey(SDL_SCANCODE_DOWN))
 			y++;
-		if (testjoy.getRightStickY() < -100)
+		if (testjoy.getRightStickY() < -100 || mainEng->getKey(SDL_SCANCODE_UP))
 			y--;
-		if (testjoy.getRightStickX() < -100)
+		if (testjoy.getRightStickX() < -100 || mainEng->getKey(SDL_SCANCODE_LEFT))
 			x--;
-		if (testjoy.getRightStickX() > 100)
+		if (testjoy.getRightStickX() > 100 || mainEng->getKey(SDL_SCANCODE_RIGHT))
 			x++;
 
 		//set up an exit key
