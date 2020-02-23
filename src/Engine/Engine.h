@@ -42,7 +42,7 @@ public:
 	void setPosition(int, int);	//set the position of the window
 	void setSize(unsigned int, unsigned int);	//set the size of the window
 	void setName(std::string);	// set the title of the window
-	void setResolution(int,int);	//adjusts the renderer's size
+	void setResolution(unsigned int, unsigned int);	//adjusts the renderer's size
 
 	void maximizeWindow();	//maximizes the window to the size of the monitor
 	void restoreWindow();	//puts the window back where it was prior to maximization

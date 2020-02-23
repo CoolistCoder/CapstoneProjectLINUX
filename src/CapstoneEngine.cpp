@@ -14,8 +14,9 @@ int main(int, char**) {
 	//create a simple instance of the engine
 	Engine* mainEng = new Engine();
 	mainEng->makeWindow(640, 480, "Hello, World!");	//create the window for the engine
+	mainEng->setSize(1920/2, 1080/2);	//testing for setSize
 	//we want to use a different resolution for the scene
-	mainEng->setResolution(160,120);
+	mainEng->setResolution(1920/4,1080/4);
 
 	//simple demonstration variables for input
 	int x = 0, y = 0;

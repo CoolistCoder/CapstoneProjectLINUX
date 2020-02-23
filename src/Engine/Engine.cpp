@@ -297,6 +297,9 @@ void Engine::setPosition(int x, int y){
 
 void Engine::setSize(unsigned int w, unsigned int h){
 	//like the previous position function, we can do the same with the size
+	//we also need to save this new size for recalcRenderer
+	this->windowW = w;
+	this->windowH = h;
 	SDL_SetWindowSize(this->window, w, h);
 	//an unsigned int cannot be negative, so inherently this would work
 }
@@ -309,7 +312,7 @@ void Engine::setName(std::string newname){
 	}
 }
 
-void Engine::setResolution(int w, int h){
+void Engine::setResolution(unsigned int w, unsigned int h){
 	//this can be achieved with a simple call to gluortho
 	//however, we want to make sure that we have the correct matrix mode set
 	glMatrixMode(GL_PROJECTION);
