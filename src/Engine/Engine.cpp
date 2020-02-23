@@ -118,7 +118,7 @@ void Engine::end(){
 }
 
 void Engine::makeWindow(unsigned int w, unsigned int h, std::string title){
-	if (this->success){ //we only want to create a window if we can successfully initialize the engine!
+	if (this->success && !this->window){ //we only want to create a window if we can successfully initialize the engine!
 		//now, the window needs to be initialized
 		//we need to use a particular function to achieve this
 		this->window = SDL_CreateWindow( //this function will properly set the window's properties
