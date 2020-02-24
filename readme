@@ -1,0 +1,3 @@
+If the engine doesn't work, it is possible SDL2 is just not installed.
+To install SDL2, simply run the included bash script called installSDL2.
+Once installed, SDL2 applications will run normally and SDL2 programs can be coded.
