@@ -301,6 +301,8 @@ void Engine::setSize(unsigned int w, unsigned int h){
 	this->windowW = w;
 	this->windowH = h;
 	SDL_SetWindowSize(this->window, w, h);
+	//we also need to recenter the window
+	this->setPosition(SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 	//an unsigned int cannot be negative, so inherently this would work
 }
 
