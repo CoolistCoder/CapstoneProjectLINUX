@@ -41,4 +41,6 @@ the dedication it took to go about a project of this scope.
 	able to present a small report of our research.
 	
 2/23/20
-	I am ready to proceed with my presentation for the first 
+	I am ready to proceed with my presentation for the first presentation. After extensive bugtesting and 
+	variable adjustment, I have come up with a build I am satisfied with.  My partner should be catching up
+	to my work shortly, and I will be touching bases with him tonight.  Hoping for the best.
