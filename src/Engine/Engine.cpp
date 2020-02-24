@@ -176,7 +176,7 @@ void Engine::setGLDefaults(){
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);	//OpenGL 3.3
 
 	//now we need to tell OpenGL how often we want it to update
-	SDL_GL_SetSwapInterval(1);	//Every 1 millisecond the screen will be updated
+	SDL_GL_SetSwapInterval(0);	//disable VSync
 
 	//we also want to avoid any sort of hard edges where the triangles meet
 	//we will tell OpenGL directly to use the smooth shading model
