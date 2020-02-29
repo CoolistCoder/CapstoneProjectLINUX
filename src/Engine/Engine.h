@@ -53,7 +53,7 @@ public:
 
 	void setFPS(unsigned int);	//set how many times the engine's screen updates per second
 
-	bool getKey(SDL_Scancode); //check whether a particular keyboard key is down
+	static bool getKey(SDL_Scancode); //check whether a particular keyboard key is down
 
 	void addJoystick(Joystick*); //This simply adds a joystick to the engine
 
