@@ -44,3 +44,9 @@ the dedication it took to go about a project of this scope.
 	I am ready to proceed with my presentation for the first presentation. After extensive bugtesting and 
 	variable adjustment, I have come up with a build I am satisfied with.  My partner should be catching up
 	to my work shortly, and I will be touching bases with him tonight.  Hoping for the best.
+	
+3/3/20
+	While I believe our meeting went well, it is imperative we do not slack on this milestone.  This is where
+	the real meat of the project is.  I have met with Steven to explain this concept of scenes and entities, and
+	I want to have it all done by this milestone if possible.  While I know my ambition may be a little excessive,
+	I believe it is possible to get it all completed by this point.

@@ -11,6 +11,7 @@ using namespace std;
 #include "Engine/Scene.h"
 
 void sceneBehavior(Scene*);
+void boxBehavior(Entity*);
 
 //Define commandline parameters for SDL2
 int main(int, char**) {
@@ -28,6 +29,15 @@ int main(int, char**) {
 	//create a scene instance
 	Scene* scene1 = new Scene(mainEng);
 	scene1->setBehavior(sceneBehavior);
+
+	//create an entity
+	Entity* newbox = new Box;
+
+	//give the entity something to do
+	newbox->setBehavior(boxBehavior);
+
+	//give the box to the scene
+	scene1->addEntity(newbox);
 
 
 	//Now fullscreen the window
@@ -49,12 +59,8 @@ int main(int, char**) {
 
 	//create the while loop for the 'game' logic
 	while(mainEng->getRunning()){
-		//until the X in the top right is clicked, it will keep updating the screen
-		mainEng->clearScreen();
 
 		scene1->execute();
-
-		mainEng->drawScreen();
 	}
 
 	/*
@@ -64,7 +70,7 @@ int main(int, char**) {
 	}
 	*/
 
-	//remove all scenes
+	//delete any scenes
 	delete scene1;
 
 	//clean up the engine (this will clean it up on its own)
@@ -74,6 +80,7 @@ int main(int, char**) {
 }
 
 void sceneBehavior(Scene* ns){
+	/*Not necessary!
 	//This is a demo function that takes the items from main and puts them in a custom function
 	//for the scene to handle.
 	static int x = 0, y = 0;
@@ -98,4 +105,32 @@ void sceneBehavior(Scene* ns){
 		glVertex2i(x,y+10);		//top right
 	glEnd();					//stop drawing
 	//this will produce a simple square in the top left corner
+	 */
 }
+
+void boxBehavior(Entity* b){
+	Box* temp = static_cast<Box*>(b);
+
+	//save the position of the square into variables
+	int x = temp->getX(), y = temp->getY();
+
+	//allow us to modify those variables with the keyboard
+	if (Engine::getKey(SDL_SCANCODE_DOWN))
+		y++;
+	if (Engine::getKey(SDL_SCANCODE_UP))
+		y--;
+	if (Engine::getKey(SDL_SCANCODE_LEFT))
+		x--;
+	if (Engine::getKey(SDL_SCANCODE_RIGHT))
+		x++;
+
+	//put those modified variables into the box
+	temp->setPosition(x, y);
+
+	//draw the box
+	temp->draw();
+
+}
+
+
+

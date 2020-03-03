@@ -2,6 +2,7 @@
 #define ENGINE_SCENE_H_
 #include "Engine.h"
 #include "Entity.h"
+#include "Box.h"
 #include <functional>
 #include <vector>
 
@@ -13,6 +14,7 @@ private:
 	static unsigned int numscenes; //this is the total number of scenes instanciated
 	std::vector<Entity*> entitiesInScene; //all of the entities within the scene instance
 
+
 public:
 	void giveEngine(Engine*); //gives an engine to the Scene
 	void setBehavior(void newBehavior(Scene* ns));
@@ -20,7 +22,8 @@ public:
 
 	void execute();
 
-	static void cleanup();	//deletes all instances of Scenes
+	//not operational
+	//static void cleanup();	//deletes all instances of Scenes
 
 	Scene(Engine*);
 	virtual ~Scene();
