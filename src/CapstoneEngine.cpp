@@ -64,6 +64,9 @@ int main(int, char**) {
 	}
 	*/
 
+	//remove all scenes
+	delete scene1;
+
 	//clean up the engine (this will clean it up on its own)
 	delete mainEng;
 
