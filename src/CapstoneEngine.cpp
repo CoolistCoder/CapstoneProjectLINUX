@@ -126,6 +126,7 @@ void boxBehavior(Entity* b){
 
 	//put those modified variables into the box
 	temp->setPosition(x, y);
+	temp->setSize(10, 10); //make the box bigger
 
 	//draw the box
 	temp->draw();
