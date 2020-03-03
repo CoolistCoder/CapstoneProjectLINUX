@@ -381,6 +381,16 @@ void Engine::addJoystick(Joystick* newjoystick){
 	}
 }
 
+Joystick* Engine::getJoystick(unsigned int index){
+	if (!this->alljoysticks.empty()){ //make sure we have a joystick
+		if (index < this->alljoysticks.size()){ //if we have more than one joystick return the correct index
+			return this->alljoysticks.at(index);
+		}
+		return this->alljoysticks.at(0); //if the index is invalid, return player 1
+	}
+	return nullptr; //return nullptr if we have no joysticks
+}
+
 Engine::Engine() {
 	//begin by setting the defaults of everything
 	this->context = 0; //don't need the context yet

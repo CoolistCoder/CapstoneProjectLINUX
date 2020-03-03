@@ -31,6 +31,7 @@ public:
 	int getLeftStickY();	//Function for getting hte position of the left stick's Y position
 	int getRightStickX();	//Function for getting hte position of the right stick's X position
 	int getRightStickY();	//Function for getting hte position of the right stick's Y position
+	bool getPluggedIn(); 	//returns if the joystick is plugged in
 
 	void detect();	//this simply finds the joystick again if it was removed
 	static int getTotalJoysticks();	//this returns how many total joysticks were instanciated

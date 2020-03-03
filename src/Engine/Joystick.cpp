@@ -79,6 +79,11 @@ Joystick::Joystick() {
 
 }
 
+bool Joystick::getPluggedIn(){
+	//NOTE: this will only work if the joystick was plugged in already
+	return SDL_JoystickGetAttached(this->joystick);
+}
+
 Joystick::~Joystick() {
 	// TODO Auto-generated destructor stub
 	//for some odd reason, closing the joystick causes a double free

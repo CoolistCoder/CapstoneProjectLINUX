@@ -56,6 +56,7 @@ public:
 	static bool getKey(SDL_Scancode); //check whether a particular keyboard key is down
 
 	void addJoystick(Joystick*); //This simply adds a joystick to the engine
+	Joystick* getJoystick(unsigned int); //retrieves a joystick based on its index
 
 	Engine();			//the constructor automatically calls the init routine
 	virtual ~Engine();	//the destructor destroys all of the components opened by SDL2

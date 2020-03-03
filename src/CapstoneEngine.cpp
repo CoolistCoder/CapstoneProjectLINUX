@@ -10,7 +10,6 @@ using namespace std;
 #include "Engine/Engine.h"
 #include "Engine/Scene.h"
 
-void sceneBehavior(Scene*);
 void boxBehavior(Entity*);
 
 //Define commandline parameters for SDL2
@@ -28,12 +27,12 @@ int main(int, char**) {
 
 	//create a scene instance
 	Scene* scene1 = new Scene(mainEng);
-	scene1->setBehavior(sceneBehavior);
 
 	//create an entity
 	Entity* newbox = new Box;
 
 	//give the entity something to do
+	newbox->giveJoystick(&testjoy);
 	newbox->setBehavior(boxBehavior);
 
 	//give the box to the scene
@@ -79,50 +78,37 @@ int main(int, char**) {
 	return 0;
 }
 
-void sceneBehavior(Scene* ns){
-	/*Not necessary!
-	//This is a demo function that takes the items from main and puts them in a custom function
-	//for the scene to handle.
-	static int x = 0, y = 0;
-
-	//get joystick input to move the square on the screen
-	if (Engine::getKey(SDL_SCANCODE_DOWN))
-		y++;
-	if (Engine::getKey(SDL_SCANCODE_UP))
-		y--;
-	if (Engine::getKey(SDL_SCANCODE_LEFT))
-		x--;
-	if (Engine::getKey(SDL_SCANCODE_RIGHT))
-		x++;
-
-	//create a simple square to test this
-	glMatrixMode(GL_MODELVIEW);	//change the matrix to the modelview matrix to modify objects drawn to the screen
-	glLoadIdentity();			//change the active identity to the modelview matrix
-	glBegin(GL_QUADS);			//draw quads
-		glVertex2i(x,y);		//top left
-		glVertex2i(x+10,y);		//bottom left
-		glVertex2i(x+10,y+10);		//bottom right
-		glVertex2i(x,y+10);		//top right
-	glEnd();					//stop drawing
-	//this will produce a simple square in the top left corner
-	 */
-}
-
 void boxBehavior(Entity* b){
 	Box* temp = static_cast<Box*>(b);
 
 	//save the position of the square into variables
 	int x = temp->getX(), y = temp->getY();
 
-	//allow us to modify those variables with the keyboard
-	if (Engine::getKey(SDL_SCANCODE_DOWN))
-		y++;
-	if (Engine::getKey(SDL_SCANCODE_UP))
-		y--;
-	if (Engine::getKey(SDL_SCANCODE_LEFT))
-		x--;
-	if (Engine::getKey(SDL_SCANCODE_RIGHT))
-		x++;
+	//alternate between keyboard and joystick based on what's available
+	if (temp->getJoystick() && temp->getJoystick()->getPluggedIn()){
+		//allow us to modify those variables with the keyboard
+		if (temp->getJoystick()->getLeftStickY() > 100)
+			y++;
+		if (temp->getJoystick()->getLeftStickY() < -100)
+			y--;
+		if (temp->getJoystick()->getLeftStickX() < -100)
+			x--;
+		if (temp->getJoystick()->getLeftStickX() > 100)
+			x++;
+	}
+	else{
+		//allow us to modify those variables with the keyboard
+		if (Engine::getKey(SDL_SCANCODE_DOWN))
+			y++;
+		if (Engine::getKey(SDL_SCANCODE_UP))
+			y--;
+		if (Engine::getKey(SDL_SCANCODE_LEFT))
+			x--;
+		if (Engine::getKey(SDL_SCANCODE_RIGHT))
+			x++;
+	}
+
+
 
 	//put those modified variables into the box
 	temp->setPosition(x, y);
