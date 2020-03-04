@@ -8,17 +8,19 @@ void Box::defaultBehavior(Entity* e){
 
 void Box::draw(){
 	//TODO replace directdraw mode with vertex mode
-	//we can largely copy the code we've used previously for the draw function
-	glMatrixMode(GL_MODELVIEW);	//change the matrix to the modelview matrix to modify objects drawn to the screen
-	glLoadIdentity();			//change the active identity to the modelview matrix
-	glBegin(GL_QUADS);			//draw quads
-		glVertex2i(this->x,this->y);		//top left
-		glVertex2i(this->x+this->w,this->y);		//bottom left
-		glVertex2i(this->x+this->w,this->y+this->h);		//bottom right
-		glVertex2i(this->x,this->y+this->h);		//top right
-	glEnd();					//stop drawing
-	//this will draw our box
-
+	//we only want to use our box drawing function if the visible value is true
+	if (this->visible){
+		//we can largely copy the code we've used previously for the draw function
+		glMatrixMode(GL_MODELVIEW);	//change the matrix to the modelview matrix to modify objects drawn to the screen
+		glLoadIdentity();			//change the active identity to the modelview matrix
+		glBegin(GL_QUADS);			//draw quads
+			glVertex2i(this->x,this->y);		//top left
+			glVertex2i(this->x+this->w,this->y);		//bottom left
+			glVertex2i(this->x+this->w,this->y+this->h);		//bottom right
+			glVertex2i(this->x,this->y+this->h);		//top right
+		glEnd();					//stop drawing
+		//this will draw our box
+	}
 }
 
 void Box::setPosition(int x, int y){

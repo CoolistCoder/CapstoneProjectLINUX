@@ -24,7 +24,8 @@ public:
 	void setSize(unsigned int, unsigned int); //set the size of the box
 	unsigned int getW(){ return this->w; }; //return the width of the box
 	unsigned int getH(){ return this->h; }; //return the height of the box
-
+	void hide(){ this->visible = false; }; //hides the box
+	void show(){ this->visible = true; }; //shows the box
 
 	void execute(); //execute the box's stored behavior
 
