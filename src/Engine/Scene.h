@@ -3,6 +3,7 @@
 #include "Engine.h"
 #include "Entity.h"
 #include "Box.h"
+#include "Line.h"
 #include <functional>
 #include <vector>
 

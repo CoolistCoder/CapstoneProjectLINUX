@@ -11,6 +11,7 @@ using namespace std;
 #include "Engine/Scene.h"
 
 void boxBehavior(Entity*);
+void lineBehavior(Entity*);
 
 //Define commandline parameters for SDL2
 int main(int, char**) {
@@ -28,6 +29,7 @@ int main(int, char**) {
 	//create a scene instance
 	Scene* scene1 = new Scene(mainEng);
 
+	/*TODO put this back when done with line testing
 	//create an entity
 	Entity* newbox = new Box;
 
@@ -37,6 +39,16 @@ int main(int, char**) {
 
 	//give the box to the scene
 	scene1->addEntity(newbox);
+	*/
+
+	//create a line
+	Entity* newline = new Line;
+
+	//give the line something to do
+	newline->setBehavior(lineBehavior);
+
+	//give the scene the line
+	scene1->addEntity(newline);
 
 
 	//Now fullscreen the window
@@ -119,5 +131,24 @@ void boxBehavior(Entity* b){
 
 }
 
+
+void lineBehavior(Entity* e){
+	Line* temp = static_cast<Line*>(e);
+	int x = temp->getEndX(), y = temp->getEndY();
+
+	if (Engine::getKey(SDL_SCANCODE_DOWN))
+		y++;
+	if (Engine::getKey(SDL_SCANCODE_UP))
+		y--;
+	if (Engine::getKey(SDL_SCANCODE_LEFT))
+		x--;
+	if (Engine::getKey(SDL_SCANCODE_RIGHT))
+		x++;
+
+	temp->setEndX(x);
+	temp->setEndY(y);
+
+	temp->draw();
+}
 
 
