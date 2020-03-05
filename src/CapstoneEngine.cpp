@@ -29,7 +29,6 @@ int main(int, char**) {
 	//create a scene instance
 	Scene* scene1 = new Scene(mainEng);
 
-	/*TODO put this back when done with line testing
 	//create an entity
 	Entity* newbox = new Box;
 
@@ -39,10 +38,12 @@ int main(int, char**) {
 
 	//give the box to the scene
 	scene1->addEntity(newbox);
-	*/
 
 	//create a line
 	Entity* newline = new Line;
+
+	//also give the line the box
+	newline->attachEntity(newbox);
 
 	//give the line something to do
 	newline->setBehavior(lineBehavior);
@@ -133,21 +134,23 @@ void boxBehavior(Entity* b){
 
 
 void lineBehavior(Entity* e){
-	Line* temp = static_cast<Line*>(e);
-	int x = temp->getEndX(), y = temp->getEndY();
+	Line* temp = static_cast<Line*>(e); //store the line in a temporary variable
+	Box* attachedBox = static_cast<Box*>(e->getAttachedEntity(0)); //store the box we attached to the line to a variable
 
-	if (Engine::getKey(SDL_SCANCODE_DOWN))
-		y++;
-	if (Engine::getKey(SDL_SCANCODE_UP))
-		y--;
-	if (Engine::getKey(SDL_SCANCODE_LEFT))
-		x--;
-	if (Engine::getKey(SDL_SCANCODE_RIGHT))
-		x++;
+	//now set the line's position
+	temp->setLinePosition(0,0,attachedBox->getX(),attachedBox->getY());
+	//and draw
+	temp->draw();
 
-	temp->setEndX(x);
-	temp->setEndY(y);
+	//repeat the last two calls for each corner to demonstrate flexibility
+	//now set the line's position
+	temp->setLinePosition((1920/4)-1,0,attachedBox->getX() + attachedBox->getW()-1,attachedBox->getY()-1);
+	//and draw
+	temp->draw();
 
+	//now set the line's position
+	temp->setLinePosition((1920/4)-1,(1080/4)-1,attachedBox->getX() + attachedBox->getW(),attachedBox->getY()-1 + attachedBox->getH()-1);
+	//and draw
 	temp->draw();
 }
 

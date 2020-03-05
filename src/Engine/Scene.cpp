@@ -26,6 +26,7 @@ void Scene::setBehavior(void newBehavior(Scene* ns)){
 void Scene::addEntity(Entity* newEntity){
 	 //only add an entity if the entity isn't null
 	if (newEntity){
+		newEntity->setEngine(this->knownEngine); //give the entity access to the engine
 		this->entitiesInScene.push_back(newEntity); //give us the brand new entity
 	}
 }
