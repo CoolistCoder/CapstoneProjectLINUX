@@ -43,6 +43,8 @@ public:
 	void setSize(unsigned int, unsigned int);	//set the size of the window
 	void setName(std::string);	// set the title of the window
 	void setResolution(unsigned int, unsigned int);	//adjusts the renderer's size
+	unsigned int getResW() { return this->rendererW; }; //get the renderer's width
+	unsigned int getResH() { return this->rendererH; }; //get the renderer's height
 
 	void maximizeWindow();	//maximizes the window to the size of the monitor
 	void restoreWindow();	//puts the window back where it was prior to maximization

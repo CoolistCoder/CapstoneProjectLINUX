@@ -320,6 +320,8 @@ void Engine::setResolution(unsigned int w, unsigned int h){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//load the identity of the matrix mode
 	gluOrtho2D(0,w,h,0);	//now call gluortho
+	this->rendererW = w; //now adjust the renderer variables accordingly
+	this->rendererH = h;
 	//Being able to set the resolution within the window is intended behavior, even if it's much larger
 }
 

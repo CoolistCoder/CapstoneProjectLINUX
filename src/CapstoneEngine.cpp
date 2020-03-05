@@ -134,6 +134,7 @@ void boxBehavior(Entity* b){
 
 
 void lineBehavior(Entity* e){
+	//I want to create four lines that extend to each corner of the renderer and attach to the box at each corner
 	Line* temp = static_cast<Line*>(e); //store the line in a temporary variable
 	Box* attachedBox = static_cast<Box*>(e->getAttachedEntity(0)); //store the box we attached to the line to a variable
 
@@ -144,12 +145,17 @@ void lineBehavior(Entity* e){
 
 	//repeat the last two calls for each corner to demonstrate flexibility
 	//now set the line's position
-	temp->setLinePosition((1920/4)-1,0,attachedBox->getX() + attachedBox->getW()-1,attachedBox->getY()-1);
+	temp->setLinePosition(temp->getEngine()->getResW(),0,attachedBox->getX() + attachedBox->getW(),attachedBox->getY());
 	//and draw
 	temp->draw();
 
 	//now set the line's position
-	temp->setLinePosition((1920/4)-1,(1080/4)-1,attachedBox->getX() + attachedBox->getW(),attachedBox->getY()-1 + attachedBox->getH()-1);
+	temp->setLinePosition(temp->getEngine()->getResW(),temp->getEngine()->getResH(),attachedBox->getX() + attachedBox->getW(),attachedBox->getY() + attachedBox->getH());
+	//and draw
+	temp->draw();
+
+	//now set the line's position
+	temp->setLinePosition(0,temp->getEngine()->getResH(),attachedBox->getX(),attachedBox->getY() + attachedBox->getH());
 	//and draw
 	temp->draw();
 }
