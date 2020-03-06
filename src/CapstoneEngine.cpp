@@ -7,8 +7,7 @@
 using namespace std;
 
 //we only need to include the Engine.h file
-#include "Engine/Engine.h"
-#include "Engine/Scene.h"
+#include "Engine/CapstoneEngine.h"
 
 void boxBehavior(Entity*);
 void lineBehavior(Entity*);
@@ -97,6 +96,29 @@ void boxBehavior(Entity* b){
 	//save the position of the square into variables
 	int x = temp->getX(), y = temp->getY();
 
+	//create static variables for bouncing the cube around the screen
+	static int bouncex = 1, bouncey = 1;
+
+	//make conditions for if the cube hits the boundary of the resolution
+	if (x > (signed)b->getEngine()->getResW()){
+		bouncex = -1;
+	}
+	if (x < 0){
+		bouncex = 1;
+	}
+	if (y > (signed)b->getEngine()->getResH()){
+		bouncey = -1;
+	}
+	if (y < 0){
+		bouncey = 1;
+	}
+
+	//always increment the ball by the amount of the bonuce variables
+	x+=bouncex;
+	y+=bouncey;
+
+
+	/*code no longer needed, but can be used to control the cube in place of the above code
 	//alternate between keyboard and joystick based on what's available
 	if (temp->getJoystick() && temp->getJoystick()->getPluggedIn()){
 		//allow us to modify those variables with the keyboard
@@ -120,6 +142,7 @@ void boxBehavior(Entity* b){
 		if (Engine::getKey(SDL_SCANCODE_RIGHT))
 			x++;
 	}
+	*/
 
 
 
@@ -130,6 +153,8 @@ void boxBehavior(Entity* b){
 	//draw the box
 	temp->draw();
 
+	//A possibly better way of handling this code would be to create an inherited object out of the box
+	//This will remove the need for any static variables
 }
 
 
