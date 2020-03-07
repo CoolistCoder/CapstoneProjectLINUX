@@ -21,6 +21,11 @@ int main(int, char**) {
 	//we want to use a different resolution for the scene
 	mainEng->setResolution(1920/4,1080/4);
 
+	//set up an error log
+	//ErrorLog log;
+	//log.logError("Too much fun");
+	//log.popupError();
+
 	//SIMPLE TEST OF THE JOYSTICK
 	Joystick testjoy;
 	mainEng->addJoystick(&testjoy); //now add the joystick to the engine
@@ -42,7 +47,10 @@ int main(int, char**) {
 	Entity* newline = new Line;
 
 	//also give the line the box
+	//newline->coupleEntity(newbox); //commented out due to testing
+	//newline->decoupleEntity(newbox);
 	newline->attachEntity(newbox);
+	newline->detachEntity(newbox);
 
 	//give the line something to do
 	newline->setBehavior(lineBehavior);
@@ -161,28 +169,33 @@ void boxBehavior(Entity* b){
 void lineBehavior(Entity* e){
 	//I want to create four lines that extend to each corner of the renderer and attach to the box at each corner
 	Line* temp = static_cast<Line*>(e); //store the line in a temporary variable
-	Box* attachedBox = static_cast<Box*>(e->getAttachedEntity(0)); //store the box we attached to the line to a variable
+	Box* attachedBox = static_cast<Box*>(e->getAttachedEntity((unsigned int)0)); //store the box we attached to the line to a variable
 
-	//now set the line's position
-	temp->setLinePosition(0,0,attachedBox->getX(),attachedBox->getY());
-	//and draw
-	temp->draw();
+	//we only want the lines to be drawn if the box is attached to our line
+	if (attachedBox){
+		//now set the line's position
+		temp->setLinePosition(0,0,attachedBox->getX(),attachedBox->getY());
+		//and draw
+		temp->draw();
 
-	//repeat the last two calls for each corner to demonstrate flexibility
-	//now set the line's position
-	temp->setLinePosition(temp->getEngine()->getResW(),0,attachedBox->getX() + attachedBox->getW(),attachedBox->getY());
-	//and draw
-	temp->draw();
+		//repeat the last two calls for each corner to demonstrate flexibility
+		//now set the line's position
+		temp->setLinePosition(temp->getEngine()->getResW(),0,attachedBox->getX() + attachedBox->getW(),attachedBox->getY());
+		//and draw
+		temp->draw();
 
-	//now set the line's position
-	temp->setLinePosition(temp->getEngine()->getResW(),temp->getEngine()->getResH(),attachedBox->getX() + attachedBox->getW(),attachedBox->getY() + attachedBox->getH());
-	//and draw
-	temp->draw();
+		//now set the line's position
+		temp->setLinePosition(temp->getEngine()->getResW(),temp->getEngine()->getResH(),attachedBox->getX() + attachedBox->getW(),attachedBox->getY() + attachedBox->getH());
+		//and draw
+		temp->draw();
 
-	//now set the line's position
-	temp->setLinePosition(0,temp->getEngine()->getResH(),attachedBox->getX(),attachedBox->getY() + attachedBox->getH());
-	//and draw
-	temp->draw();
+		//now set the line's position
+		temp->setLinePosition(0,temp->getEngine()->getResH(),attachedBox->getX(),attachedBox->getY() + attachedBox->getH());
+		//and draw
+		temp->draw();
+	}
+
+
 }
 
 

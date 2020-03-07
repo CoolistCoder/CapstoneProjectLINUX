@@ -50,3 +50,12 @@ the dedication it took to go about a project of this scope.
 	the real meat of the project is.  I have met with Steven to explain this concept of scenes and entities, and
 	I want to have it all done by this milestone if possible.  While I know my ambition may be a little excessive,
 	I believe it is possible to get it all completed by this point.
+	
+3/7/20
+	In the middle of working on the entities and improving some of their aspects like coupling and decoupling, 
+	I had a vivid idea for how I should handle errors.  I want to create a simple object that contains the
+	error information should the developer need it.  So if the engine crashes there is at least a simple
+	way to check for errors.	
+	
+	
+	

@@ -11,6 +11,9 @@
 #include "Joystick.h"
 #include <vector> //We can use vectors for mass joystick detection among other features
 
+//we also need error logging capabilities
+#include "ErrorLog.h"
+
 class Engine {
 private:
 	bool isrunning; //determines whether the window is still active
@@ -19,6 +22,7 @@ private:
 	SDL_GLContext context;	//the opengl context of the window
 	unsigned int framerate;	//the rate at which the window updates in seconds
 	Uint32 firsttick;	//the first tick of the loop (used for updating the screen)
+	ErrorLog* log; //the error log that the engine will know about (TODO IMPLEMENT THIS)
 
 	unsigned int windowW, windowH;	//the width and height of the window recorded
 	unsigned int rendererW, rendererH;	//the 'renderer' is where the graphics will be adjusted to fit a specific resolution

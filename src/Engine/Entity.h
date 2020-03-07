@@ -27,8 +27,11 @@ public:
 
 	//attachment functions
 	void attachEntity(Entity*); //attaches an entity one way to this entity
-	void combineEntity(Entity*); //attaches an entity two ways to this entity
+	void coupleEntity(Entity*); //attaches an entity two ways to this entity
 	Entity* getAttachedEntity(unsigned int); //get the attached entity by index
+	//Entity* getAttachedEntity(Entity*); //get the attached entity by address (not very useful)
+	void detachEntity(Entity*); //detach a specified entity
+	void decoupleEntity(Entity*); //remove a specified entity from both entities
 
 	//engine functions
 	void setEngine(Engine* e) { this->knownEngine = e;}; //let the entity know about the engine
