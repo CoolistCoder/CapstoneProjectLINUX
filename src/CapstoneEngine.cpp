@@ -58,14 +58,6 @@ int main(int, char**) {
 	//give the scene the line
 	scene1->addEntity(newline);
 
-	//image test, simply loading in an image to see if it loads
-	Image* testimage = new Image;
-	testimage->loadImage("notfound.png");
-	if (testimage->empty()){
-		cout << "image not found" << endl;
-	}
-	delete testimage;
-
 	//Now fullscreen the window
 	//mainEng->fullscreenWindow();
 

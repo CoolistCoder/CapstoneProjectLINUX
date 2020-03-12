@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Box.h"
 #include "Line.h"
+#include "Sprite.h"
 #include <functional>
 #include <vector>
 
