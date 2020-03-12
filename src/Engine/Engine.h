@@ -11,6 +11,9 @@
 #include "Joystick.h"
 #include <vector> //We can use vectors for mass joystick detection among other features
 
+//We will keep the image class in the engine header to make it easier to share it everywhere
+#include "Image.h"
+
 //we also need error logging capabilities
 #include "ErrorLog.h"
 

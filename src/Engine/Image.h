@@ -4,11 +4,13 @@
 #define ENGINE_IMAGE_H_
 #include <SDL2/SDL_image.h> //image library
 #include <GL/gl.h> //the library that stores the image
+#include <iostream>
 
 class Image {
 private:
 	SDL_Surface* storedSource; //The source image, stored into the image object
 	GLuint image; //The image that will be drawn
+	unsigned int imageWidth, imageHeight; //the width and height of the image
 
 public:
 	void loadImage(const char*); //loads an image from a source file
