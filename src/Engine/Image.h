@@ -7,7 +7,7 @@
 #include <iostream>
 
 class Image {
-private:
+protected:
 	SDL_Surface* storedSource; //The source image, stored into the image object
 	GLuint image; //The image that will be drawn
 	unsigned int imageWidth, imageHeight; //the width and height of the image

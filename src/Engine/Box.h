@@ -7,7 +7,7 @@
 //It works exactly the same
 
 class Box : public Entity{
-private:
+protected:
 	int x, y; //the x and y positions of the box
 	unsigned w, h; //the width and height of the box
 	bool visible;

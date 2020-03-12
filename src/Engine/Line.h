@@ -5,7 +5,7 @@
 #include <math.h> //the math library is necessary in this object
 
 class Line : public Entity{
-private:
+protected:
 	int startX, startY; //the starting point of the line
 	int endX, endY; //the ending point of the line
 
