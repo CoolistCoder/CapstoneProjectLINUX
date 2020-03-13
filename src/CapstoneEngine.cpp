@@ -11,6 +11,7 @@ using namespace std;
 
 void boxBehavior(Entity*);
 void lineBehavior(Entity*);
+void cameraBehavior(Entity*);
 
 //Define commandline parameters for SDL2
 int main(int, char**) {
@@ -40,6 +41,9 @@ int main(int, char**) {
 	newbox->giveJoystick(&testjoy);
 	newbox->setBehavior(boxBehavior);
 
+	//we want to modify the box's priority so it looks correct when moving it around the screen with the camera's focus
+	newbox->setPriority(1);
+
 	//give the box to the scene
 	scene1->addEntity(newbox);
 
@@ -55,8 +59,27 @@ int main(int, char**) {
 	//give the line something to do
 	newline->setBehavior(lineBehavior);
 
+	//give the line priority 2 so the camera looks correct when moving around
+	newline->setPriority(2);
+
 	//give the scene the line
 	scene1->addEntity(newline);
+
+	//create a camera
+	Entity* newcamera = new Camera();
+
+	//give the camera the box
+	newcamera->attachEntity(newbox);
+
+	//give the scene the camera and then make it the main camera
+	scene1->addEntity(newcamera);
+	scene1->setActiveCamera(static_cast<Camera*>(newcamera));
+
+	//set the camera's size to the renderer
+	static_cast<Camera*>(newcamera)->sizeToRenderer();
+
+	//give the camera its behavior
+	newcamera->setBehavior(cameraBehavior);
 
 	//Now fullscreen the window
 	//mainEng->fullscreenWindow();
@@ -99,6 +122,9 @@ int main(int, char**) {
 
 void boxBehavior(Entity* b){
 	Box* temp = static_cast<Box*>(b);
+
+	//draw the box
+	temp->draw();
 
 	//save the position of the square into variables
 	int x = temp->getX(), y = temp->getY();
@@ -157,8 +183,7 @@ void boxBehavior(Entity* b){
 	temp->setPosition(x, y);
 	temp->setSize(10, 10); //make the box bigger
 
-	//draw the box
-	temp->draw();
+
 
 	//A possibly better way of handling this code would be to create an inherited object out of the box
 	//This will remove the need for any static variables
@@ -193,8 +218,15 @@ void lineBehavior(Entity* e){
 		//and draw
 		temp->draw();
 	}
-
-
 }
 
+void cameraBehavior(Entity* c){
+	//create a temporary pointer in order to store the camera for easy access
+	Camera* temp = static_cast<Camera*>(c);
+	//create a temporary box pointer for the same purpose
+	Box* tempbox = static_cast<Box*>(temp->getAttachedEntity(0));
+
+	//now just focus the camera to the center of the box
+	temp->focusTo((tempbox->getX())+((signed)tempbox->getW()/2)+(temp->getW()/2),(tempbox->getY()+((signed)tempbox->getH() / 2)+(temp->getH()/2)));
+}
 

@@ -94,11 +94,20 @@ void Entity::decoupleEntity(Entity* e){
 	}
 }
 
+void Entity::modifyOffset(int x, int y){
+	//just set the values
+	this->modposX = x;
+	this->modposY = y;
+}
+
 Entity::Entity() {
 	// TODO Auto-generated constructor stub
 	this->priority = 0; //if priorities match they're drawn in order of when they're added
 	this->knownJoystick = nullptr; //initially, there is no joystick
 	this->knownEngine = nullptr;
+	//the camera can't exist yet, these are zero
+	this->modposX = 0;
+	this->modposY = 0;
 }
 
 Entity::~Entity() {

@@ -14,6 +14,9 @@ protected:
 	Joystick* knownJoystick; //the joystick that the entity is given
 	Engine* knownEngine; //the engine known by the entity
 
+	//the camera-modified positions of Entities.  Only entities that need them will use them.
+	int modposX, modposY;
+
 	std::vector<Entity*> attachedEntities; //list of entities connected to this entity
 
 public:
@@ -36,6 +39,8 @@ public:
 	//engine functions
 	void setEngine(Engine* e) { this->knownEngine = e;}; //let the entity know about the engine
 	Engine* getEngine() { return this->knownEngine; }; //retrieve the engine known by the entity
+
+	void modifyOffset(int, int); //modify the modposx and modposy variables within the entity
 
 	virtual void execute() = 0; //pure virtual function for executing the entity's stored behavior
 

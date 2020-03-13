@@ -37,6 +37,8 @@ Camera::Camera() {
 	this->w = 0;
 	this->h = 0;
 
+	//give the camera the default behavior
+	this->setBehavior(Camera::defaultBehavior);
 }
 
 Camera::~Camera() {
