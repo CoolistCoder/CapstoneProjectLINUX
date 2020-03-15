@@ -1,6 +1,10 @@
 
 #include "Sprite.h"
 
+void Sprite::draw(){
+
+}
+
 void Sprite::execute(){
 
 }
