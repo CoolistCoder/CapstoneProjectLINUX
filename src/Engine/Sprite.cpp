@@ -71,6 +71,7 @@ void Sprite::draw(){
 		glMatrixMode(GL_TEXTURE);
 		glLoadIdentity();
 
+		//must disable textures before we do anything else to prevent opengl from getting confused with our textures
 		glDisable(GL_TEXTURE_2D);
 
 	}
