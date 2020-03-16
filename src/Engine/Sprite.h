@@ -12,11 +12,18 @@ private:
 
 	int frame; //the frame the sprite is drawn at
 
+	int rotation; //the rotation of the sprite
+
+	static void defaultBehavior(Entity*);
+
 public:
+
+	void setPosition(int, int);
+	void setSize(int, int);
 
 	void draw(); //the draw function for the sprite
 
-	void execute();
+	void execute(); //execute the sprite's stored behavior
 
 	Sprite();
 	virtual ~Sprite();

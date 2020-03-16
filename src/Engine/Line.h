@@ -9,6 +9,8 @@ protected:
 	int startX, startY; //the starting point of the line
 	int endX, endY; //the ending point of the line
 
+	Uint8 r, g, b, a;
+
 	static void defaultBehavior(Entity*); //the default behavior of the line
 
 public:
@@ -24,6 +26,8 @@ public:
 	void setEndX(int newPosition) { this->endX = newPosition; }; //set the end position of X
 	void setEndY(int newPosition) { this->endY = newPosition; }; //set the end position of Y
 	void setLinePosition(int,int,int,int); //set the line's start and end
+	void setColor(Uint8, Uint8, Uint8);
+	void setTransparency(Uint8);
 
 	void draw(); //draw the line
 

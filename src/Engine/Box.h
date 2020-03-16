@@ -12,6 +12,8 @@ protected:
 	unsigned w, h; //the width and height of the box
 	bool visible;
 
+	Uint8 r,g,b,a; //the rgba values of the box
+
 	static void defaultBehavior(Entity* e); //the default behavior of a box
 
 
@@ -26,6 +28,9 @@ public:
 	unsigned int getH(){ return this->h; }; //return the height of the box
 	void hide(){ this->visible = false; }; //hides the box
 	void show(){ this->visible = true; }; //shows the box
+
+	void setColor(Uint8, Uint8, Uint8); //sets the color of the box
+	void setTransparency(Uint8); //sets the transparency of the box
 
 	void execute(); //execute the box's stored behavior
 
