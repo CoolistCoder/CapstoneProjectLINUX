@@ -73,13 +73,18 @@ int main(int, char**) {
 
 	//give the scene the camera and then make it the main camera
 	scene1->addEntity(newcamera);
-	scene1->setActiveCamera(static_cast<Camera*>(newcamera));
+	//scene1->setActiveCamera(static_cast<Camera*>(newcamera));
 
 	//set the camera's size to the renderer
 	static_cast<Camera*>(newcamera)->sizeToRenderer();
 
 	//give the camera its behavior
 	newcamera->setBehavior(cameraBehavior);
+
+	Sprite* newsprite = new Sprite;
+	newsprite->loadImage("notfound.png");
+	newsprite->setSize(16,16);
+	scene1->addEntity(newsprite);
 
 	//Now fullscreen the window
 	//mainEng->fullscreenWindow();

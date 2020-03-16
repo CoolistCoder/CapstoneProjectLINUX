@@ -9,17 +9,18 @@ class Sprite : public Entity, public Image{
 private:
 	int x, y; //the position data of the sprite
 	int w, h; //the width and height of the sprite
+	unsigned int framesW, framesH; //the number of horizontal and vertical frames
 
 	int frame; //the frame the sprite is drawn at
 
 	int rotation; //the rotation of the sprite
 
-	static void defaultBehavior(Entity*);
+	static void defaultBehavior(Entity*); //the default behavior of the sprite
 
 public:
 
-	void setPosition(int, int);
-	void setSize(int, int);
+	void setPosition(int, int); //set the position of the sprite
+	void setSize(int, int); //set the size of the sprite
 
 	void draw(); //the draw function for the sprite
 
