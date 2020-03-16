@@ -96,6 +96,9 @@ Sprite::Sprite() {
 	//set the rotation of the sprite to 0, we have no data for this yet
 	this->rotation = 0;
 
+	//by default, the number of subimages across and down would be 1
+	this->framesW = 1;
+	this->framesH = 1;
 
 	//set the default behavior of the sprite
 	this->setBehavior(Sprite::defaultBehavior);

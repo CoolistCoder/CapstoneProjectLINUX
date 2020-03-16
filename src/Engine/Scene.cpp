@@ -109,6 +109,7 @@ Scene::Scene(Engine* newEngine) {
 	//This object NEEDS to know what an engine is, if it doesn't, then it defeats the point of having a scene object
 	this->giveEngine(newEngine);
 	this->setBehavior(Scene::defaultBehavior);
+	this->activeCamera = nullptr; //set up with a null camera
 	Scene::numscenes++; //increment the number of scenes
 }
 

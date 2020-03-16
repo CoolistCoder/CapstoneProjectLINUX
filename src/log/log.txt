@@ -57,5 +57,8 @@ the dedication it took to go about a project of this scope.
 	error information should the developer need it.  So if the engine crashes there is at least a simple
 	way to check for errors.	
 	
-	
-	
+3/16/20
+	Recently, a pandemic has been on my mind and it's been difficult to focus on what I am supposed to be working
+	on.  However, I am definitely catching up.  I'm worried we won't be able to get to where we are supposed to be
+	but maybe we can figure this all out.  The sprite object is about halfway done now however, so maybe I could
+	get this to all work somehow?
