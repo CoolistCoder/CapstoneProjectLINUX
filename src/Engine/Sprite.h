@@ -11,6 +11,8 @@ private:
 	int w, h; //the width and height of the sprite
 	unsigned int framesW, framesH; //the number of horizontal and vertical frames
 
+	bool HFlip, VFlip; //booleans to determine the horizontal and vertical flipping
+
 	int frame; //the frame the sprite is drawn at
 
 	int rotation; //the rotation of the sprite
@@ -23,6 +25,16 @@ public:
 	void setSize(int, int); //set the size of the sprite
 	void setFrameCount(unsigned int, unsigned int); //set the number of horizontal and vertical frames
 	void setFrame(int); //set the current frame
+
+	//flip functions
+	void activateVerticalFlip() { this->VFlip = true; }; //force the vertical flip true
+	void activateHorizontalFlip() { this->HFlip = true; }; //force the horizontal flip true
+	void deactivateVerticalFlip() { this->VFlip = false; }; //force the vertical flip false
+	void deactivateHorizontalFlip() { this->HFlip = false; }; //force the horizontal flip false
+	void toggleVerticalFlip(); //toggle between true/false vertical flips
+	void toggleHorizontalFlip(); //toggle between true/false horizontal flips
+
+	void setRotation(int);
 
 	void draw(); //the draw function for the sprite
 

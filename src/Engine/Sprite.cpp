@@ -35,6 +35,10 @@ void Sprite::setFrame(int currentFrame){
 	}
 }
 
+void Sprite::setRotation(int theta){
+	this->rotation = theta;
+}
+
 void Sprite::draw(){
 	//we only want to implement the draw if the sprite has data
 	if (!this->empty()){
@@ -72,6 +76,35 @@ void Sprite::draw(){
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
 
+		//apply rotation if rotation isn't 0
+		if (this->rotation != 0){
+			glTranslatef(subimageX+(subimageW/2), subimageY+(subimageH/2), 0); 	//translate to the center of the object
+			glRotatef(this->rotation,0,0,1); //rortate the object on its Z axis
+			glTranslatef(-(subimageX+subimageW/2),-(subimageY+subimageH/2),0);	//translate the object back to its point
+		}
+
+		//we need to account for culling if a flip is to occur
+		if (this->HFlip || this->VFlip){ //change the culling
+			glFrontFace(GL_CCW); //cull counterclockwise if a flip occurs
+		}
+		if (this->HFlip && this->VFlip){
+			glFrontFace(GL_CW); //cull clockwise if a double flip is present
+		}
+
+		//perform a horizontal flip if the horizontal flip bool is true
+		if (this->HFlip){
+			glTranslatef(subimageX+(subimageW/2), subimageY+(subimageH/2), 0); 	//translate to the center of the object
+			glRotatef(180,0,1,0); //rortate the object on its Y axis
+			glTranslatef(-(subimageX+subimageW/2),-(subimageY+subimageH/2),0);	//translate the object back to its point
+		}
+
+		//perform a vertical flip if the vertical flip bool is true
+		if (this->VFlip){
+			glTranslatef(subimageX+(subimageW/2), subimageY+(subimageH/2), 0); 	//translate to the center of the object
+			glRotatef(180,1,0,0); //rortate the object on its X axis
+			glTranslatef(-(subimageX+subimageW/2),-(subimageY+subimageH/2),0);	//translate the object back to its point
+		}
+
 		//set up the texture parameters so the image will draw using the precise pixels
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -85,22 +118,27 @@ void Sprite::draw(){
 		//TODO IMPLEMENT THE SUBIMAGE DRAWING
 		//begin drawing
 		glBegin(GL_QUADS);
-			glTexCoord2i(subimageX,subimageY); //top left of the subimage
+			glTexCoord2i((subimageX),(subimageY)); //top left of the subimage
 			glVertex2i(this->x + this->modposX, this->y + this->modposY); //top left of sprite
 
-			glTexCoord2i(subimageX + subimageW,subimageY); //top right of the subimage
+			glTexCoord2i((subimageX + subimageW),(subimageY)); //top right of the subimage
 			glVertex2i(this->x + this->w + this->modposX, this->y + this->modposY); //top right of sprite
 
-			glTexCoord2i(subimageX + subimageW,subimageY + subimageH); //bottom right of the subimage
+			glTexCoord2i((subimageX + subimageW),(subimageY + subimageH)); //bottom right of the subimage
 			glVertex2i(this->x + this->w + this->modposX, this->y + this->h + this->modposY); //bottom right of sprite
 
-			glTexCoord2i(subimageX,subimageY + subimageH);  //bottom left of the subimage
+			glTexCoord2i((subimageX),(subimageY + subimageH));  //bottom left of the subimage
 			glVertex2i(this->x + this->modposX, this->y + this->h + this->modposY); //bottom left of sprite
 
 		glEnd();
 
 		glMatrixMode(GL_TEXTURE);
 		glLoadIdentity();
+
+		//we want to return everything to the status quo
+		if (this->HFlip || this->VFlip){ //change the culling
+			glFrontFace(GL_CW); //cull clockwise if a flip occurred
+		}
 
 		//must disable textures before we do anything else to prevent opengl from getting confused with our textures
 		glDisable(GL_TEXTURE_2D);
@@ -130,6 +168,10 @@ Sprite::Sprite() {
 	//by default, the number of subimages across and down would be 1
 	this->framesW = 1;
 	this->framesH = 1;
+
+	//by default, no flip will occur
+	this->HFlip = false;
+	this->VFlip = false;
 
 	//set the default behavior of the sprite
 	this->setBehavior(Sprite::defaultBehavior);

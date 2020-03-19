@@ -12,6 +12,7 @@ using namespace std;
 void boxBehavior(Entity*);
 void lineBehavior(Entity*);
 void cameraBehavior(Entity*);
+void spriteBehavior(Entity*);
 
 //Define commandline parameters for SDL2
 int main(int, char**) {
@@ -82,10 +83,13 @@ int main(int, char**) {
 	newcamera->setBehavior(cameraBehavior);
 
 	Sprite* newsprite = new Sprite;
-	newsprite->loadImage("notfound.png");
+	newsprite->loadImage("num.png");
 	newsprite->setSize(16,16);
 	newsprite->setFrameCount(2,2);
 	newsprite->setFrame(0);
+	newsprite->setBehavior(spriteBehavior);
+	//newsprite->activateHorizontalFlip();
+	//newsprite->activateVerticalFlip();
 
 	scene1->addEntity(newsprite);
 
@@ -251,3 +255,12 @@ void cameraBehavior(Entity* c){
 	temp->focusTo((tempbox->getX())+((signed)tempbox->getW()/2)+(temp->getW()/2),(tempbox->getY()+((signed)tempbox->getH() / 2)+(temp->getH()/2)));
 }
 
+void spriteBehavior(Entity* s){
+	//we just want to demonstrate things like rotation
+	Sprite* temp = static_cast<Sprite*>(s);
+	static int t = 0;
+	temp->setRotation(t);
+	temp->draw();
+
+
+}
