@@ -21,6 +21,8 @@ public:
 
 	void setPosition(int, int); //set the position of the sprite
 	void setSize(int, int); //set the size of the sprite
+	void setFrameCount(unsigned int, unsigned int); //set the number of horizontal and vertical frames
+	void setFrame(int); //set the current frame
 
 	void draw(); //the draw function for the sprite
 

@@ -22,12 +22,43 @@ void Sprite::defaultBehavior(Entity* d){
 	static_cast<Sprite*>(d)->draw();
 }
 
+void Sprite::setFrameCount(unsigned int across, unsigned int down){
+	//this will subdivide the image, be careful when using this!
+	this->framesW = across;
+	this->framesH = down;
+}
+
+void Sprite::setFrame(int currentFrame){
+	//set the current frame based on the integer index
+	if (currentFrame >= 0){ //prevent this from being less than 0
+		this->frame = currentFrame;
+	}
+}
+
 void Sprite::draw(){
 	//we only want to implement the draw if the sprite has data
 	if (!this->empty()){
 
 		//we need to get some data
-		const unsigned int total_subimages = this->framesW * this->framesH; //the total subimages made from the image
+		const int total_subimages = this->framesW * this->framesH; //the total subimages made from the image
+
+		//we need to be able to calculate what subimages to grab based on the image index
+		//make sure the frame value isn't higher than the number of total images we have
+		while (this->frame >= total_subimages){
+			//subtract 1 from frame until we have a valid index
+			this->frame--;
+		}
+
+		//the subimage's width and height is based on the image's total size / number of images in corresponding direction
+		const int subimageW = this->storedSource->w / this->framesW;
+		const int subimageH = this->storedSource->h / this->framesH;
+
+
+		//now we need to select the correct image based on this index
+		//calculate the image we want to grab across using modulo and the width of the subimage
+		const int subimageX = (this->frame % this->framesW) * (this->storedSource->w / this->framesW);
+		//calculate the image we want to grab down using division and the height of the subimage
+		const int subimageY = (this->frame / this->framesW) * (this->storedSource->h / this->framesH);
 
 		//make sure we set the mode to gl_texture
 		glMatrixMode(GL_TEXTURE);
@@ -54,16 +85,16 @@ void Sprite::draw(){
 		//TODO IMPLEMENT THE SUBIMAGE DRAWING
 		//begin drawing
 		glBegin(GL_QUADS);
-			glTexCoord2i(0,0); //top left of the subimage
+			glTexCoord2i(subimageX,subimageY); //top left of the subimage
 			glVertex2i(this->x + this->modposX, this->y + this->modposY); //top left of sprite
 
-			glTexCoord2i(16,0); //top right of the subimage
+			glTexCoord2i(subimageX + subimageW,subimageY); //top right of the subimage
 			glVertex2i(this->x + this->w + this->modposX, this->y + this->modposY); //top right of sprite
 
-			glTexCoord2i(16,16); //bottom right of the subimage
+			glTexCoord2i(subimageX + subimageW,subimageY + subimageH); //bottom right of the subimage
 			glVertex2i(this->x + this->w + this->modposX, this->y + this->h + this->modposY); //bottom right of sprite
 
-			glTexCoord2i(0,16);  //bottom left of the subimage
+			glTexCoord2i(subimageX,subimageY + subimageH);  //bottom left of the subimage
 			glVertex2i(this->x + this->modposX, this->y + this->h + this->modposY); //bottom left of sprite
 
 		glEnd();

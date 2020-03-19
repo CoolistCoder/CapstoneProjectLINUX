@@ -84,7 +84,11 @@ int main(int, char**) {
 	Sprite* newsprite = new Sprite;
 	newsprite->loadImage("notfound.png");
 	newsprite->setSize(16,16);
+	newsprite->setFrameCount(2,2);
+	newsprite->setFrame(0);
+
 	scene1->addEntity(newsprite);
+
 
 	//Now fullscreen the window
 	//mainEng->fullscreenWindow();
