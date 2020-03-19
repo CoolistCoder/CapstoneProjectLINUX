@@ -74,13 +74,14 @@ int main(int, char**) {
 
 	//give the scene the camera and then make it the main camera
 	scene1->addEntity(newcamera);
-	//scene1->setActiveCamera(static_cast<Camera*>(newcamera));
+	scene1->setActiveCamera(static_cast<Camera*>(newcamera));
 
 	//set the camera's size to the renderer
 	static_cast<Camera*>(newcamera)->sizeToRenderer();
+	static_cast<Camera*>(newcamera)->focusTo(-20,0);
 
 	//give the camera its behavior
-	newcamera->setBehavior(cameraBehavior);
+	//newcamera->setBehavior(cameraBehavior);
 
 	Sprite* newsprite = new Sprite;
 	newsprite->loadImage("num.png");
@@ -88,7 +89,7 @@ int main(int, char**) {
 	newsprite->setFrameCount(2,2);
 	newsprite->setFrame(0);
 	newsprite->setBehavior(spriteBehavior);
-	//newsprite->activateHorizontalFlip();
+	newsprite->activateHorizontalFlip();
 	//newsprite->activateVerticalFlip();
 
 	scene1->addEntity(newsprite);
