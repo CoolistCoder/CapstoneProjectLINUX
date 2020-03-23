@@ -81,7 +81,7 @@ int main(int, char**) {
 	static_cast<Camera*>(newcamera)->focusTo(-20,0);
 
 	//give the camera its behavior
-	//newcamera->setBehavior(cameraBehavior);
+	newcamera->setBehavior(cameraBehavior);
 
 	Sprite* newsprite = new Sprite;
 	newsprite->loadImage("num.png");
@@ -89,8 +89,8 @@ int main(int, char**) {
 	newsprite->setFrameCount(2,2);
 	newsprite->setFrame(0);
 	newsprite->setBehavior(spriteBehavior);
-	newsprite->activateHorizontalFlip();
-	//newsprite->activateVerticalFlip();
+	//newsprite->activateHorizontalFlip();
+	newsprite->activateVerticalFlip();
 
 	scene1->addEntity(newsprite);
 
@@ -260,7 +260,7 @@ void spriteBehavior(Entity* s){
 	//we just want to demonstrate things like rotation
 	Sprite* temp = static_cast<Sprite*>(s);
 	static int t = 0;
-	temp->setRotation(t);
+	temp->setRotation(t++);
 	temp->draw();
 
 

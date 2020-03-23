@@ -62,3 +62,8 @@ the dedication it took to go about a project of this scope.
 	on.  However, I am definitely catching up.  I'm worried we won't be able to get to where we are supposed to be
 	but maybe we can figure this all out.  The sprite object is about halfway done now however, so maybe I could
 	get this to all work somehow?
+	
+3/22/20
+	My worries were completely unwarranted, as we have implemented all of the entities successfully.  Most of them
+	need a little more time to marinate but we have succeeded as far as I am concerned.  We have done well and I
+	am very proud of all we are accomplishing.  We will be able to do this.
