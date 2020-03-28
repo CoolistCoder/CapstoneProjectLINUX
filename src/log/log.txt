@@ -67,3 +67,8 @@ the dedication it took to go about a project of this scope.
 	My worries were completely unwarranted, as we have implemented all of the entities successfully.  Most of them
 	need a little more time to marinate but we have succeeded as far as I am concerned.  We have done well and I
 	am very proud of all we are accomplishing.  We will be able to do this.
+	
+3/28/20
+	With the second milestone complete, we are ready to move on to the final stage of our project: We will implement
+	the final entities and iron out any things that need to be ironed out.  Very excited for the last few weeks on
+	this project.

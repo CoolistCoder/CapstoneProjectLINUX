@@ -34,7 +34,12 @@ public:
 	void toggleVerticalFlip(); //toggle between true/false vertical flips
 	void toggleHorizontalFlip(); //toggle between true/false horizontal flips
 
-	void setRotation(int);
+	void setRotation(int); //set the rotation angle of the sprite
+
+	//collision functions
+	bool collideAgainst(Sprite*); //check if a collision occured with another sprite
+	bool collideAgainst(int, int); //check to see if a point is colliding with this sprite
+	bool collideAgainst(int, int, int, int); //check to see if a box-like entity is colliding with this sprite
 
 	void draw(); //the draw function for the sprite
 

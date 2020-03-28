@@ -94,6 +94,10 @@ int main(int, char**) {
 
 	scene1->addEntity(newsprite);
 
+	if (newsprite->collideAgainst(16,16, 16, 16)){
+		cout << "Collission occured" << endl;
+	}
+
 
 	//Now fullscreen the window
 	//mainEng->fullscreenWindow();

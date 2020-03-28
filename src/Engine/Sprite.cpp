@@ -39,6 +39,58 @@ void Sprite::setRotation(int theta){
 	this->rotation = theta;
 }
 
+bool Sprite::collideAgainst(Sprite* spr){
+	//like the collideAgainst code with the individual points, but for another sprite
+	if (spr){
+		//we need to compare the values given with the sprite
+		if ((this->y + this->h) < spr->y)
+			//return false if the sprite is too far up
+			return false;
+		if (this->y > (spr->y + spr->h))
+			//return false if the sprite is too far down
+			return false;
+		if ((this->x + this->w) < spr->x)
+			//return false if the sprite is too far left
+			return false;
+		if (this->x > (spr->x + spr->w))
+			//return false if the sprite is too far right
+			return false;
+		//return true if the values overlap
+		return true;
+	}
+	return false;
+}
+
+bool Sprite::collideAgainst(int x, int y){
+	//simply check to see if these values are within the box
+	if ((x >= this->x && x <= this->x + this->w) && (y >= this->y && y <= this->y + this->h)){
+		//The X of the point must be greater than or equal to the X of the sprite
+		//The X of the point must also be less than or equal to the relative width of the sprite
+		//the Y of the point must be greater than or equal to the Y of the sprite
+		//The Y of the point must also be less than or equal to the relative height of the sprite
+		return true; //if these conditions are met, return true
+	}
+	return false; //otherwise, return false
+}
+
+bool Sprite::collideAgainst(int x, int y, int w, int h){
+	//we need to compare the values given with the sprite
+	if ((this->y + this->h) < y)
+		//return false if the sprite is too far up
+		return false;
+	if (this->y > (y + h))
+		//return false if the sprite is too far down
+		return false;
+	if ((this->x + this->w) < x)
+		//return false if the sprite is too far left
+		return false;
+	if (this->x > (x + w))
+		//return false if the sprite is too far right
+		return false;
+	//return true if the values overlap
+	return true;
+}
+
 void Sprite::draw(){
 	//we only want to implement the draw if the sprite has data
 	if (!this->empty()){
