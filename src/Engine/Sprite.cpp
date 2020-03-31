@@ -130,9 +130,9 @@ void Sprite::draw(){
 
 		//apply rotation if rotation isn't 0
 		if (this->rotation != 0){
-			glTranslatef(subimageX+this->modposX+(subimageW/2), subimageY+this->modposY+(subimageH/2), 0); 	//translate to the center of the object
+			glTranslatef(this->x+this->modposX+(this->w/2), this->y+this->modposY+(this->h/2), 0); 	//translate to the center of the object
 			glRotatef(this->rotation,0,0,1); //rortate the object on its Z axis
-			glTranslatef(-(subimageX+this->modposX+subimageW/2),-(subimageY+this->modposY+subimageH/2),0);	//translate the object back to its point
+			glTranslatef(-(this->x+this->modposX+this->w/2),-(this->y+this->modposY+this->h/2),0);	//translate the object back to its point
 		}
 
 		//we need to account for culling if a flip is to occur
@@ -145,16 +145,16 @@ void Sprite::draw(){
 
 		//perform a horizontal flip if the horizontal flip bool is true
 		if (this->HFlip){
-			glTranslatef(subimageX+this->modposX+(subimageW/2), subimageY+this->modposY+(subimageH/2), 0); 	//translate to the center of the object
+			glTranslatef(this->x+this->modposX+(this->w/2), this->y+this->modposY+(this->h/2), 0); 	//translate to the center of the object
 			glRotatef(180,0,1,0); //rortate the object on its Y axis
-			glTranslatef(-(subimageX+this->modposX+subimageW/2),-(subimageY+this->modposY+subimageH/2),0);	//translate the object back to its point
+			glTranslatef(-(this->x+this->modposX+this->w/2),-(this->y+this->modposY+this->h/2),0);	//translate the object back to its point
 		}
 
 		//perform a vertical flip if the vertical flip bool is true
 		if (this->VFlip){
-			glTranslatef(subimageX+this->modposX+(subimageW/2), subimageY+this->modposY+(subimageH/2), 0); 	//translate to the center of the object
+			glTranslatef(this->x+this->modposX+(this->w/2), this->y+this->modposY+(this->h/2), 0); 	//translate to the center of the object
 			glRotatef(180,1,0,0); //rortate the object on its X axis
-			glTranslatef(-(subimageX+this->modposX+subimageW/2),-(subimageY+this->modposY+subimageH/2),0);	//translate the object back to its point
+			glTranslatef(-(this->x+this->modposX+this->w/2),-(this->y+this->modposY+this->h/2),0);	//translate the object back to its point
 		}
 
 		//set up the texture parameters so the image will draw using the precise pixels
