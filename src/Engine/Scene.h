@@ -6,6 +6,7 @@
 #include "Line.h"
 #include "Sprite.h"
 #include "Camera.h"
+#include "Sound.h"
 #include <functional>
 #include <vector>
 

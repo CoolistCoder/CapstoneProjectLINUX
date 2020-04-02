@@ -13,6 +13,7 @@ void boxBehavior(Entity*);
 void lineBehavior(Entity*);
 void cameraBehavior(Entity*);
 void spriteBehavior(Entity*);
+void soundBehavior(Entity*);
 
 //Define commandline parameters for SDL2
 int main(int, char**) {
@@ -78,7 +79,7 @@ int main(int, char**) {
 
 	//set the camera's size to the renderer
 	static_cast<Camera*>(newcamera)->sizeToRenderer();
-	static_cast<Camera*>(newcamera)->focusTo(-20,0);
+	static_cast<Camera*>(newcamera)->focusTo(0,0);
 
 	//give the camera its behavior
 	newcamera->setBehavior(cameraBehavior);
@@ -98,21 +99,15 @@ int main(int, char**) {
 		cout << "Collission occured" << endl;
 	}
 
-
-	//Now fullscreen the window
-	//mainEng->fullscreenWindow();
-
-	//TODO This is a test of the audio so we don't need it until the next milestone
-	//This is our code for testing audio
-	/*
-	Mix_Music* musicdata = nullptr; //We load in our music data to a pointer
-	musicdata = Mix_LoadMUS("robomb.wav");	//load in the music (in this case a WAV created by me)
-	if (!musicdata){	//if the music data was not found, we can display a message in the terminal for now
-		cout << "could not find music" << endl;
+	Sound::setGlobalVolume(40);
+	Sound* testsound = new Sound;
+	testsound->loadMusic("robomb.wav");
+	if (!testsound->loaded()){
+		std::cout << "Failed to find file" << std::endl;
 	}
-	Mix_VolumeMusic(50);	//lower the volume a bit, it's quite loud!
-	*/
+	testsound->setBehavior(soundBehavior);
 
+	scene1->addEntity(testsound);
 
 
 
@@ -266,6 +261,17 @@ void spriteBehavior(Entity* s){
 	static int t = 0;
 	temp->setRotation(t++);
 	temp->draw();
-
-
 }
+
+void soundBehavior(Entity* s){
+	Sound* temp = static_cast<Sound*>(s);
+	temp->play();
+}
+
+
+
+
+
+
+
+
