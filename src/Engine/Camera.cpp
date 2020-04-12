@@ -22,6 +22,11 @@ void Camera::sizeToRenderer(){
 		this->w = -(signed)this->getEngine()->getResW();
 		this->h = -(signed)this->getEngine()->getResH();
 	}
+	this->isToRenderer = true; //Because we want to use the renderer's size, this becomes automatically true
+}
+
+void Camera::toCustomSize(int w, int h){
+	//TODO implement this later
 }
 
 void Camera::execute(){
@@ -36,6 +41,8 @@ Camera::Camera() {
 	this->y = 0;
 	this->w = 0;
 	this->h = 0;
+
+	this->isToRenderer = true; //by default, the camera is simply to the same size as the renderer
 
 	//give the camera the default behavior
 	this->setBehavior(Camera::defaultBehavior);
