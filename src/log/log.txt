@@ -72,3 +72,9 @@ the dedication it took to go about a project of this scope.
 	With the second milestone complete, we are ready to move on to the final stage of our project: We will implement
 	the final entities and iron out any things that need to be ironed out.  Very excited for the last few weeks on
 	this project.
+
+4/13/20
+	The 3rd milestone is showing off a few issues here and there.  For some odd reason, the camera is misbehaving and
+	now I must possibly spend a week modeling this issue.  I may just ignore it and move on, or I may create a dedicated
+	function for positioning the camera to the center of an object.  I'm sure that it is correctable, but this could limit
+	the camera's ability to chase an object.
