@@ -75,7 +75,7 @@ int main(int, char**) {
 
 	//give the scene the camera and then make it the main camera
 	scene1->addEntity(newcamera);
-	//scene1->setActiveCamera(static_cast<Camera*>(newcamera));
+	scene1->setActiveCamera(static_cast<Camera*>(newcamera));
 
 	//set the camera's size to the renderer
 	static_cast<Camera*>(newcamera)->sizeToRenderer();
@@ -109,6 +109,22 @@ int main(int, char**) {
 
 	scene1->addEntity(testsound);
 
+
+    static int map[] = {
+        0, 0, 0, 0,
+        1, 1, 1, 1,
+        2, 2, 2, 2,
+        3, 3, 3, 3,
+        4, 4, 4, 4
+    }; //this is our map data
+
+    Tilemap* newtilemap = new Tilemap();
+    newtilemap->loadImage("num.png");
+    scene1->addEntity(newtilemap);
+    newtilemap->createMap(map, 4 * 5);
+    newtilemap->allFrameCount(2, 2);
+
+    newtilemap->allTileSize(25, 25);
 
 
 	//create the while loop for the 'game' logic
@@ -252,7 +268,7 @@ void cameraBehavior(Entity* c){
 	Box* tempbox = static_cast<Box*>(temp->getAttachedEntity(0));
 
 	//now just focus the camera to the center of the box
-	temp->focusTo((tempbox->getX())+((signed)tempbox->getW()/2)+(temp->getW()/2),(tempbox->getY()+((signed)tempbox->getH() / 2)+(temp->getH()/2)));
+	temp->focusTo(tempbox->getX() - temp->getEngine()->getResW()/2,tempbox->getY() - temp->getEngine()->getResH()/2);
 }
 
 void spriteBehavior(Entity* s){

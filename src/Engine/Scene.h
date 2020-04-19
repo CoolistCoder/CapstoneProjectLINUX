@@ -7,6 +7,8 @@
 #include "Sprite.h"
 #include "Camera.h"
 #include "Sound.h"
+#include "Tile.h"
+#include "Tilemap.h"
 #include <functional>
 #include <vector>
 

@@ -9,40 +9,56 @@
 
 class Entity {
 protected:
-	std::function<void(Entity* e)> storedBehavior; //the behavior stored in the entity
+	std::function<void(Entity * e)> storedBehavior; //the behavior stored in the entity
 	unsigned int priority; //the priority of the entity and when it is handled in the vector
 	Joystick* knownJoystick; //the joystick that the entity is given
 	Engine* knownEngine; //the engine known by the entity
 
-	//the camera-modified positions of Entities.  Only entities that need them will use them.
+	//the camera-modified positions of Entities. Only entities that need them will use them
 	int modposX, modposY;
+	int renderAreaW, renderAreaH;
+
+	//the viewarea data
+	int viewarx, viewary, viewarw, viewarh;
 
 	std::vector<Entity*> attachedEntities; //list of entities connected to this entity
 
 public:
-	void setBehavior(void(Entity*)); //sets the behavior of the entity
+	virtual void setBehavior(void(Entity*)); //sets the behavior of the entity
 
-	void setPriority(unsigned int p) { this->priority = p; }; //simply set this instances's priority index
+	void setPriority(unsigned int p) { this->priority = p; }; //simply set this instance's priority index
 	unsigned int getPriority() { return this->priority; }; //simply return this instance's priority index
 
 	void giveJoystick(Joystick*); //gives the entity a joystick
 	Joystick* getJoystick(); //get the joystick associated with this entity
 
-	//attachment functions
+	//attachement functions
 	void attachEntity(Entity*); //attaches an entity one way to this entity
 	void coupleEntity(Entity*); //attaches an entity two ways to this entity
 	Entity* getAttachedEntity(unsigned int); //get the attached entity by index
-	//Entity* getAttachedEntity(Entity*); //get the attached entity by address (not very useful)
 	void detachEntity(Entity*); //detach a specified entity
 	void decoupleEntity(Entity*); //remove a specified entity from both entities
 
 	//engine functions
-	void setEngine(Engine* e) { this->knownEngine = e;}; //let the entity know about the engine
+	void setEngine(Engine* e) { this->knownEngine = e; }; //let the entity know about the engine
 	Engine* getEngine() { return this->knownEngine; }; //retrieve the engine known by the entity
 
-	void modifyOffset(int, int); //modify the modposx and modposy variables within the entity
+	void modifyOffset(int, int); //modify the modposX and modposY variables within the entity
+	void modifyRenderArea(int, int); //modify the renderAreaW and renderAreaH variables within the entity
+	void setViewData(int,int,int,int); //just set the viewdata of the entity
 
-	virtual void execute() = 0; //pure virtual function for executing the entity's stored behavior
+	//Retrieve the camera info
+	int getViewX() {return this->viewarx;};
+	int getViewY() { return this->viewary; };
+	int getViewW() { return this->viewarw; };
+	int getViewH() { return this->viewarh; };
+	int getmodposX() { return this->modposX; };
+	int getmodposY() { return this->modposY; };
+	int getAreaW() { return this->renderAreaW; };
+	int getAreaH() { return this->renderAreaH; };
+
+
+	virtual void execute() = 0; //pure virtual functio for executing the entity's stored behavior;
 
 	Entity();
 	virtual ~Entity();
