@@ -82,6 +82,7 @@ void Scene::execute() {
 	if (this->activeCamera) {
 		//if the camera exists, proceed to loop through all the entities and modify their positions
 		for (unsigned int i = 0; i < this->entitiesInScene.size(); i++) {
+			//we need to set up everything in the scene to work with our camera
 			this->entitiesInScene.at(i)->modifyOffset(this->activeCamera->getX(), this->activeCamera->getY());
 			this->entitiesInScene.at(i)->modifyRenderArea(this->activeCamera->getW(), this->activeCamera->getH());
 			this->entitiesInScene.at(i)->setViewData(
@@ -90,6 +91,7 @@ void Scene::execute() {
 				this->activeCamera->getviewW(),
 				this->activeCamera->getviewH()
 			);
+			this->entitiesInScene.at(i)->assigned(); //we now have a camera so we can say the entity has been assigned
 		}
 	}
 

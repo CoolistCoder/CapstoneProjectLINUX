@@ -94,7 +94,7 @@ bool Tile::collideAgainst(int x, int y, int w, int h) {
 
 bool Tile::rendererCollision() {
 	//first, check and see if an engine is present
-	if (this->getEngine()) {
+	if (this->getEngine() && this->getIfAssigned()) {
 		//derender if the tile surpasses h
 		if ((this->modposY + (this->y)) > this->viewary + this->viewarh) {
 			//std::cout << "1 overlap" << std::endl;

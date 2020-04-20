@@ -111,6 +111,15 @@ Entity::Entity() {
 	this->viewary = 0;
 	this->viewarw = 0;
 	this->viewarh = 0;
+
+	//the entity, by default, has not been assigned a camera
+	this->assignedcamera = false;
+
+	this->modposX = 0;
+	this->modposY = 0;
+	this->renderAreaW = 0;
+	this->renderAreaH = 0;
+
 }
 
 Entity::~Entity() {

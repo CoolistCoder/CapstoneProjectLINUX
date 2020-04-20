@@ -42,7 +42,8 @@ void Tilemap::drawmap() {
                 i % this->mapW,
                 i / this->mapW
             );
-
+            if (this->assignedcamera) //we need to be absolutely certain that the tiles are being assigned properly
+            	this->tiles.at(i)->assigned();
             this->tiles.at(i)->modifyOffset(this->modposX, this->modposY);
             this->tiles.at(i)->modifyRenderArea(this->renderAreaW, this->renderAreaH);
             this->tiles.at(i)->setViewData(this->viewarx, this->viewary, this->viewarw, this->viewarh);
