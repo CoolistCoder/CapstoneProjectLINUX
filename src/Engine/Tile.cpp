@@ -94,7 +94,12 @@ bool Tile::collideAgainst(int x, int y, int w, int h) {
 
 bool Tile::rendererCollision() {
 	//first, check and see if an engine is present
-	if (this->getEngine() && this->getIfAssigned()) {
+	if (this->getEngine()) {
+		//make sure we even have a camera assigned, if not then we just return true
+		if (!this->getIfAssigned()){
+			return true; //just return true, we don't want to use a camera
+		}
+
 		//derender if the tile surpasses h
 		if ((this->modposY + (this->y)) > this->viewary + this->viewarh) {
 			//std::cout << "1 overlap" << std::endl;
