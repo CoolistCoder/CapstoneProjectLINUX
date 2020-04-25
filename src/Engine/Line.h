@@ -26,8 +26,8 @@ public:
 	void setEndX(int newPosition) { this->endX = newPosition; }; //set the end position of X
 	void setEndY(int newPosition) { this->endY = newPosition; }; //set the end position of Y
 	void setLinePosition(int,int,int,int); //set the line's start and end
-	void setColor(Uint8, Uint8, Uint8);
-	void setTransparency(Uint8);
+	void modifyColor(Uint8, Uint8, Uint8);
+	void modifyAlpha(Uint8);
 
 	void draw(); //draw the line
 

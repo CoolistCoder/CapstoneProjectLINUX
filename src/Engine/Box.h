@@ -29,8 +29,8 @@ public:
 	void hide(){ this->visible = false; }; //hides the box
 	void show(){ this->visible = true; }; //shows the box
 
-	void setColor(Uint8, Uint8, Uint8); //sets the color of the box
-	void setTransparency(Uint8); //sets the transparency of the box
+	void modifyColor(Uint8, Uint8, Uint8); //sets the color of the box
+	void modifyAlpha(Uint8); //sets the transparency of the box
 
 	void execute(); //execute the box's stored behavior
 

@@ -153,10 +153,10 @@ void boxBehavior(Entity* b){
 	Box* temp = static_cast<Box*>(b);
 
 	//let's make the box red
-	temp->setColor(255,0,0);
+	temp->modifyColor(255,0,0);
 
 	//let's also make the box semitransparent
-	temp->setTransparency(155);
+	temp->modifyAlpha(155);
 
 	//draw the box
 	temp->draw();
@@ -231,10 +231,10 @@ void lineBehavior(Entity* e){
 	Box* attachedBox = static_cast<Box*>(e->getAttachedEntity((unsigned int)0)); //store the box we attached to the line to a variable
 
 	//let's make the line yellow
-	temp->setColor(255,255,0);
+	temp->modifyColor(255,255,0);
 
 	//let's also make the line semitransparent
-	temp->setTransparency(155);
+	temp->modifyAlpha(155);
 
 	//we only want the lines to be drawn if the box is attached to our line
 	if (attachedBox){
