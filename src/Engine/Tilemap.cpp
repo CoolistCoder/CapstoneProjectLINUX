@@ -19,18 +19,24 @@ void Tilemap::createMap(int* arr, unsigned int arrsize) {
 
 }
 
-void Tilemap::allTileSize(int w, int h) {
+void Tilemap::tileSize(int w, int h) {
     //go through and give each tile a universal size
     for (unsigned int i = 0; i < this->tiles.size(); i++) {
         this->tiles.at(i)->setSize(w,h);
     }
 }
 
-void Tilemap::allFrameCount(int a, int d) {
+void Tilemap::frameCount(int a, int d) {
     //go through and set each tile's frame count
     for (unsigned int i = 0; i < this->tiles.size(); i++) {
         this->tiles.at(i)->setFrameCount(a,d);
     }
+}
+
+void Tilemap::setPosition(int x, int y){
+	//all this needs to do is change the x and y variables in the object
+	this->mapX = x;
+	this->mapY = y;
 }
 
 void Tilemap::drawmap() {
@@ -39,8 +45,8 @@ void Tilemap::drawmap() {
         for (unsigned int i = 0; i < this->tiles.size(); i++) {
             this->tiles.at(i)->setPosition
             (
-                i % this->mapW,
-                i / this->mapW
+                (i % this->mapW) + this->mapX,
+                (i / this->mapW) + this->mapY
             );
             if (this->assignedcamera) //we need to be absolutely certain that the tiles are being assigned properly
             	this->tiles.at(i)->assigned();

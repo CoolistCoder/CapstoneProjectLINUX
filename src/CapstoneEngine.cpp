@@ -75,7 +75,7 @@ int main(int, char**) {
 
 	//give the scene the camera and then make it the main camera
 	scene1->addEntity(newcamera);
-	//scene1->setActiveCamera(static_cast<Camera*>(newcamera));
+	scene1->setActiveCamera(static_cast<Camera*>(newcamera));
 
 	//set the camera's size to the renderer
 	static_cast<Camera*>(newcamera)->sizeToRenderer();
@@ -122,9 +122,10 @@ int main(int, char**) {
     newtilemap->loadImage("num.png");
     scene1->addEntity(newtilemap);
     newtilemap->createMap(map, 4 * 5);
-    newtilemap->allFrameCount(2, 2);
+    newtilemap->frameCount(2, 2);
 
-    newtilemap->allTileSize(25, 25);
+    newtilemap->tileSize(25, 25);
+    newtilemap->setPosition(1,1);
 
 
 	//create the while loop for the 'game' logic
