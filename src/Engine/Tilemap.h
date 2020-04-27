@@ -19,6 +19,8 @@ public:
     void tileSize(int,int); //sets the size of all tiles within the tilemap
     void frameCount(int,int); //sets the frame count of all tiles within the tilemap
     void setPosition(int,int); //sets the position of the tilemap (and all of the tiles within itself)
+    void clearMap(); //clears out any data in the tilemap
+    void setSize(int,int); //sets the width and height of the tilemap
 
     void drawmap(); //draw the tiles stored in our tilemap
 

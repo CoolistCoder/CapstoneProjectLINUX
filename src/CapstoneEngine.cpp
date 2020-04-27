@@ -118,10 +118,17 @@ int main(int, char**) {
         4, 4, 4, 4
     }; //this is our map data
 
+    static int map2[] = {
+        0, 0, 0, 2,
+        1, 1, 1, 1,
+    }; //this is our map data as well
+
     Tilemap* newtilemap = new Tilemap();
     newtilemap->loadImage("num.png");
     scene1->addEntity(newtilemap);
     newtilemap->createMap(map, 4 * 5);
+    newtilemap->createMap(map2, 2 * 4);
+    newtilemap->setSize(2, 4);
     newtilemap->frameCount(2, 2);
 
     newtilemap->tileSize(25, 25);
