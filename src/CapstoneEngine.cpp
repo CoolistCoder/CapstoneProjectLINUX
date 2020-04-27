@@ -85,13 +85,13 @@ int main(int, char**) {
 	newcamera->setBehavior(cameraBehavior);
 
 	Sprite* newsprite = new Sprite;
-	newsprite->loadImage("num.png");
-	newsprite->setSize(16,16);
-	newsprite->setFrameCount(2,2);
-	newsprite->setFrame(3);
-	newsprite->setBehavior(spriteBehavior);
+	newsprite->loadImage("tim.png");
+	newsprite->setSize(100,100);
+	//newsprite->setFrameCount(2,2);
+	//newsprite->setFrame(3);
+	//newsprite->setBehavior(spriteBehavior);
 	//newsprite->activateHorizontalFlip();
-	newsprite->activateVerticalFlip();
+	//newsprite->activateVerticalFlip();
 
 	scene1->addEntity(newsprite);
 
@@ -99,7 +99,7 @@ int main(int, char**) {
 		cout << "Collission occured" << endl;
 	}
 
-	Sound::setGlobalVolume(40);
+	Sound::setGlobalVolume(0); //sssshhh
 	Sound* testsound = new Sound;
 	testsound->loadMusic("robomb.wav");
 	if (!testsound->loaded()){
@@ -133,6 +133,15 @@ int main(int, char**) {
 
     newtilemap->tileSize(25, 25);
     newtilemap->setPosition(1,1);
+
+
+    /*
+    Text* newtext = new Text();
+    newtext->loadImage("tim.png");
+    scene1->addEntity(newtext);
+    newtext->setString("Hello, World!");
+    newtext->setPriority(0);
+	*/
 
 
 	//create the while loop for the 'game' logic

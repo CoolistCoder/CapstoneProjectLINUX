@@ -18,7 +18,6 @@ void Tilemap::createMap(int* arr, unsigned int arrsize) {
             this->tiles.push_back(newtile); //add the tile to the tilemap
         }
     }
-
 }
 
 void Tilemap::tileSize(int w, int h) {
@@ -47,8 +46,8 @@ void Tilemap::drawmap() {
         for (unsigned int i = 0; i < this->tiles.size(); i++) {
             this->tiles.at(i)->setPosition
             (
-                (i % this->mapW) + this->mapX,
-                (i / this->mapW) + this->mapY
+                (i % this->mapW) + this->mapX, //set the tiles across + position of the tilemap itself
+                (i / this->mapW) + this->mapY //set the tiles down + position of the tilemap itself
             );
             if (this->assignedcamera) //we need to be absolutely certain that the tiles are being assigned properly
             	this->tiles.at(i)->assigned();
@@ -84,8 +83,8 @@ Tilemap::Tilemap() {
     //set data to defaults
     this->mapX = 0;
     this->mapY = 0;
-    this->mapW = 4;
-    this->mapH = 5;
+    this->mapW = 1;
+    this->mapH = 1;
 
     //override the default behavior
     this->setBehavior(Tilemap::defaultBehavior);
