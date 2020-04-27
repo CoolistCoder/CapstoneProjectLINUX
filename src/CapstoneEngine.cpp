@@ -75,7 +75,7 @@ int main(int, char**) {
 
 	//give the scene the camera and then make it the main camera
 	scene1->addEntity(newcamera);
-	scene1->setActiveCamera(static_cast<Camera*>(newcamera));
+	//scene1->setActiveCamera(static_cast<Camera*>(newcamera));
 
 	//set the camera's size to the renderer
 	static_cast<Camera*>(newcamera)->sizeToRenderer();
@@ -85,13 +85,13 @@ int main(int, char**) {
 	newcamera->setBehavior(cameraBehavior);
 
 	Sprite* newsprite = new Sprite;
-	newsprite->loadImage("tim.png");
-	newsprite->setSize(100,100);
-	//newsprite->setFrameCount(2,2);
-	//newsprite->setFrame(3);
-	//newsprite->setBehavior(spriteBehavior);
-	//newsprite->activateHorizontalFlip();
-	//newsprite->activateVerticalFlip();
+	newsprite->loadImage("num.png");
+	newsprite->setSize(16,16);
+	newsprite->setFrameCount(2,2);
+	newsprite->setFrame(3);
+	newsprite->setBehavior(spriteBehavior);
+	newsprite->activateHorizontalFlip();
+	newsprite->activateVerticalFlip();
 
 	scene1->addEntity(newsprite);
 
@@ -135,13 +135,12 @@ int main(int, char**) {
     newtilemap->setPosition(1,1);
 
 
-    /*
+
     Text* newtext = new Text();
-    newtext->loadImage("tim.png");
     scene1->addEntity(newtext);
-    newtext->setString("Hello, World!");
-    newtext->setPriority(0);
-	*/
+    newtext->setString("This is a long string because I am a cool boy who deserves all the oreos");
+    newtext->setSize(4,4);
+    newtext->setPosition(3,3);
 
 
 	//create the while loop for the 'game' logic

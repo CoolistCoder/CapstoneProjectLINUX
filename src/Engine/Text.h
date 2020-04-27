@@ -18,6 +18,8 @@ public:
 	void clearString(); //clears the string of the text
 	std::string getString(); //retrieves the string stored in the object
 	void drawText(); //draws the text loaded into the map
+	void setSize(int, int); //sets the size of the font
+	void setPosition(int, int); //sets the position of the text
 
 	//text will be 16x6
 

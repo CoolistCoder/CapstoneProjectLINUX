@@ -15,12 +15,12 @@ void Text::setString(std::string _str){
         //create a for loop to determine what attribs to give our tile
 		for (unsigned int i = 0; i < this->string_to_draw.size(); i++){
             newtile = new Tile; //create our new tile
-            newtile->setFrame(i); //set the frame of the sprite based on the value at arr[i]
-            newtile->setSize(16,16);
+            newtile->setFrameCount(16,6);
+            newtile->setFrame(this->string_to_draw[i] - 32); //set the frame of the sprite based on the value at arr[i]
+            newtile->setSize(this->w,this->h);
             newtile->setEngine(this->getEngine()); //give our tiles the necessary engine
             newtile->shareImage(this);
             this->tiles.push_back(newtile); //add the tile to the tilemap
-            std::cout << i << std::endl;
 		}
 	}
 }
@@ -46,8 +46,8 @@ void Text::drawText(){
         for (unsigned int i = 0; i < this->tiles.size(); i++) {
             this->tiles[i]->setPosition
             (
-                i,
-                0
+                i + this->x,
+                this->y
             );
             if (this->assignedcamera) //we need to be absolutely certain that the tiles are being assigned properly
             	this->tiles.at(i)->assigned();
@@ -60,13 +60,32 @@ void Text::drawText(){
     }
 }
 
+void Text::setSize(int w, int h){
+	//make sure w and h are greater than 0
+	if (w > 0 && h > 0){
+		//simply apply that to the w and height of this object
+		this->w = w;
+		this->h = h;
+		//then, check to see if we can apply this to the tiles if they exist
+		for (unsigned int i=0; i<this->tiles.size(); i++){
+			this->tiles[i]->setSize(this->w, this->h);
+		}
+	}
+}
+
+void Text::setPosition(int x, int y){
+	//just set the x and y variables
+	this->x = x;
+	this->y = y;
+}
+
 void Text::execute(){
 	this->storedBehavior(this); //execute the stored behavior
 }
 
 Text::Text() {
 	// TODO Auto-generated constructor stub
-	this->loadImage("text.png"); //load in the default text
+	this->loadImage("t.png"); //load in the default text
 	//make sure we have the default font
 	if (!this->empty()){ //if we do have the font, use the data from the font
 		this->x = 0;
