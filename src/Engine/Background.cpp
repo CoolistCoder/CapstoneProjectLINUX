@@ -130,6 +130,7 @@ void Background::draw() {
 		glEnable(GL_TEXTURE_2D);
 
 			glBegin(GL_QUADS);
+					glColor4ub(this->r, this->g, this->b, this->a); //set the colors of the entity beforehand
 					glTexCoord2i(drawSubX, drawSubY);				//top left of subimage
 					glVertex2i(drawToX + cameraPosX, drawToY + cameraPosY);	//top left of background
 

@@ -2,7 +2,6 @@
 
 #ifndef ENGINE_BACKGROUND_H_
 #define ENGINE_BACKGROUND_H_
-
 #include "Entity.h"
 #include "Image.h"
 

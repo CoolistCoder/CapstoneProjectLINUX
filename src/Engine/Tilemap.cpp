@@ -54,7 +54,8 @@ void Tilemap::drawmap() {
             this->tiles.at(i)->modifyOffset(this->modposX, this->modposY);
             this->tiles.at(i)->modifyRenderArea(this->renderAreaW, this->renderAreaH);
             this->tiles.at(i)->setViewData(this->viewarx, this->viewary, this->viewarw, this->viewarh);
-
+            this->tiles[i]->modifyColor(this->r, this->g, this->b); //set each tile's color to the sprite sheet's
+            this->tiles[i]->modifyAlpha(this->a); //set each tile's alpha to the sprite sheet's
             this->tiles.at(i)->draw();
         }
     }

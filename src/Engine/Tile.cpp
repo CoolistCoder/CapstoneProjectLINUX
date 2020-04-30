@@ -199,6 +199,7 @@ void Tile::draw() {
 		//TODO IMPLEMENT THE SUBIMAGE DRAWING
 		//begin drawing
 		glBegin(GL_QUADS);
+		glColor4ub(this->r, this->g, this->b, this->a); //set the colors of the entity beforehand
 		glTexCoord2i((subimageX), (subimageY)); //top left of the subimage
 		glVertex2i((this->x) + this->modposX, (this->y) + this->modposY); //top left of tile
 

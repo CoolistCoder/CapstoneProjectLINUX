@@ -133,6 +133,7 @@ int main(int, char**) {
 
     newtilemap->tileSize(25, 25);
     newtilemap->setPosition(1,1);
+    newtilemap->modifyColor(255,0,0);
 
 
 
@@ -141,6 +142,7 @@ int main(int, char**) {
     newtext->setString("This is a long string because I am a cool boy who deserves all the oreos");
     newtext->setSize(4,4);
     newtext->setPosition(3,3);
+    newtext->modifyColor(0,0,255);
 
 
 	//create the while loop for the 'game' logic
