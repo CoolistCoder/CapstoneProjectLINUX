@@ -267,7 +267,7 @@ void Engine::clearScreen(){
 		//As long as there are joystick objects we can perform this step
 		for (int i=0;i<Joystick::getTotalJoysticks();i++){
 			//for each joystick found, we simply call the detect function
-			this->alljoysticks.at(i)->detect();
+			this->alljoysticks[i]->detect();
 			//this will force all of the joysticks to be detected
 		}
 	}
