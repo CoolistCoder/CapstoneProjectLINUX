@@ -49,16 +49,22 @@ void Text::drawText(){
         for (unsigned int i = 0; i < this->tiles.size(); i++) {
             this->tiles[i]->setPosition
             (
-                i + this->x,
-                this->y
+                i + this->x, //set the x position of the text
+                this->y //set the y position of the text
             );
             if (this->assignedcamera) //we need to be absolutely certain that the tiles are being assigned properly
             	this->tiles.at(i)->assigned();
             this->tiles[i]->modifyOffset(this->modposX, this->modposY);
             this->tiles[i]->modifyRenderArea(this->renderAreaW, this->renderAreaH);
             this->tiles[i]->setViewData(this->viewarx, this->viewary, this->viewarw, this->viewarh);
-            this->tiles[i]->modifyColor(this->r, this->g, this->b); //set each tile's color to the sprite sheet's
-            this->tiles[i]->modifyAlpha(this->a); //set each tile's alpha to the sprite sheet's
+
+            //determine whether or not to use global colors
+            if (!this->individualColors){
+                this->tiles[i]->modifyColor(this->r, this->g, this->b); //set each tile's color to the sprite sheet's
+                this->tiles[i]->modifyAlpha(this->a); //set each tile's alpha to the sprite sheet's
+            }
+
+            //then draw
             this->tiles[i]->draw();
         }
     }
@@ -81,6 +87,14 @@ void Text::setPosition(int x, int y){
 	//just set the x and y variables
 	this->x = x;
 	this->y = y;
+}
+
+Tile* Text::getTile(unsigned int _at){
+	//simply get a tile at the _at index so long as the tile is within the index
+	if (_at < this->tiles.size()){
+		return this->tiles[_at];
+	}
+	return nullptr; //if a tile is not found return null
 }
 
 void Text::execute(){
@@ -108,6 +122,7 @@ Text::Text() {
 
 	this->setBehavior(Text::defaultBehavior);
 
+	this->individualColors = false; //by default, let's use a global color
 
 }
 

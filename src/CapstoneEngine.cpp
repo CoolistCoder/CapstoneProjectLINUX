@@ -2,7 +2,7 @@
  * Capstone Engine developed by Alec Roberts and Steven Cole.
  * Started Jan 22 2020
  */
-
+#include <random>
 #include <iostream>
 using namespace std;
 
@@ -14,9 +14,12 @@ void lineBehavior(Entity*);
 void cameraBehavior(Entity*);
 void spriteBehavior(Entity*);
 void soundBehavior(Entity*);
+void textBehavior(Entity*);
+void tileMapBehavior(Entity*);
 
 //Define commandline parameters for SDL2
 int main(int, char**) {
+	srand(time(nullptr)); //reset the random seed
 	//create a simple instance of the engine
 	Engine* mainEng = new Engine();
 	mainEng->makeWindow(640, 480, "Hello, World!");	//create the window for the engine
@@ -131,6 +134,8 @@ int main(int, char**) {
     newtilemap->createMap(map2, 2 * 4);
     newtilemap->setSize(2, 4);
     newtilemap->frameCount(2, 2);
+    newtilemap->notGlobalColor();
+    newtilemap->setBehavior(tileMapBehavior);
 
     newtilemap->tileSize(25, 25);
     newtilemap->setPosition(1,1);
@@ -144,6 +149,10 @@ int main(int, char**) {
     newtext->setSize(4,4);
     newtext->setPosition(3,3);
     newtext->modifyColor(0,0,255);
+    newtext->notGlobalColor();
+    newtext->setBehavior(textBehavior);
+
+
 
 
 	//create the while loop for the 'game' logic
@@ -303,8 +312,25 @@ void soundBehavior(Entity* s){
 	temp->play();
 }
 
+void textBehavior(Entity* t){
 
+	Text* temp = static_cast<Text*>(t); //turn the entity into a text entity
+	for (unsigned int i=0; i<temp->getString().size(); i++){
+		//go through each text character and make it a different color
+		temp->getTile(i)->modifyColor(rand()%255, rand()%255, rand()%255);
+	}
+	temp->drawText();
+}
 
+void tileMapBehavior(Entity* t){
+
+	Tilemap* temp = static_cast<Tilemap*>(t); //turn the entity into a text entity
+	for (unsigned int i=0; i<temp->tileQuantity(); i++){
+		//go through each text character and make it a different color
+		temp->getTile(i)->modifyColor(rand()%255, rand()%255, rand()%255);
+	}
+	temp->drawmap();
+}
 
 
 

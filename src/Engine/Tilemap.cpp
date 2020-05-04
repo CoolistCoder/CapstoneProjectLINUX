@@ -54,9 +54,14 @@ void Tilemap::drawmap() {
             this->tiles.at(i)->modifyOffset(this->modposX, this->modposY);
             this->tiles.at(i)->modifyRenderArea(this->renderAreaW, this->renderAreaH);
             this->tiles.at(i)->setViewData(this->viewarx, this->viewary, this->viewarw, this->viewarh);
-            this->tiles[i]->modifyColor(this->r, this->g, this->b); //set each tile's color to the sprite sheet's
-            this->tiles[i]->modifyAlpha(this->a); //set each tile's alpha to the sprite sheet's
-            this->tiles.at(i)->draw();
+
+            //determine whether or not to use global colors
+            if (!this->individualColors){
+                this->tiles[i]->modifyColor(this->r, this->g, this->b); //set each tile's color to the sprite sheet's
+                this->tiles[i]->modifyAlpha(this->a); //set each tile's alpha to the sprite sheet's
+            }
+
+            this->tiles.at(i)->draw(); //then just draw
         }
     }
 }
@@ -80,12 +85,23 @@ void Tilemap::setSize(int w, int h){
 	}
 }
 
+Tile* Tilemap::getTile(unsigned int _at){
+	//simply get a tile at the _at index so long as the tile is within the index
+	if (_at < this->tiles.size()){
+		return this->tiles[_at];
+	}
+	return nullptr; //if a tile is not found return null
+}
+
 Tilemap::Tilemap() {
     //set data to defaults
     this->mapX = 0;
     this->mapY = 0;
     this->mapW = 1;
     this->mapH = 1;
+
+    //set the individual colors variable to false
+    this->individualColors = false;
 
     //override the default behavior
     this->setBehavior(Tilemap::defaultBehavior);
