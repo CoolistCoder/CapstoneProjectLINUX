@@ -75,11 +75,12 @@ int main(int, char**) {
 
 	//give the scene the camera and then make it the main camera
 	scene1->addEntity(newcamera);
-	//scene1->setActiveCamera(static_cast<Camera*>(newcamera));
+	scene1->setActiveCamera(static_cast<Camera*>(newcamera));
 
 	//set the camera's size to the renderer
 	static_cast<Camera*>(newcamera)->sizeToRenderer();
 	static_cast<Camera*>(newcamera)->focusTo(0,0);
+	//static_cast<Camera*>(newcamera)->setViewArea(0,0,80,80);
 
 	//give the camera its behavior
 	newcamera->setBehavior(cameraBehavior);
@@ -286,7 +287,7 @@ void cameraBehavior(Entity* c){
 	Box* tempbox = static_cast<Box*>(temp->getAttachedEntity(0));
 
 	//now just focus the camera to the center of the box
-	temp->focusTo(tempbox->getX() - temp->getEngine()->getResW()/2,tempbox->getY() - temp->getEngine()->getResH()/2);
+	//temp->focusTo(tempbox->getX() - temp->getEngine()->getResW()/2,tempbox->getY() - temp->getEngine()->getResH()/2);
 }
 
 void spriteBehavior(Entity* s){

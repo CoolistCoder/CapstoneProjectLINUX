@@ -73,8 +73,6 @@ void Line::draw(){
 	//this is where the line must be drawn
 	while (true){ //because of this formula, we break when the condition is met within the loop
 		//perform a typical draw here but use quads to simulate pixels
-		//TODO REMOVE AND REPLACE WITH VERTEX MODE
-
 		glBegin(GL_QUADS);
 			glVertex2i(savedStartX, savedStartY); //top left
 			glVertex2i(savedStartX+1, savedStartY); //top right

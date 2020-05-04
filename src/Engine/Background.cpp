@@ -2,12 +2,13 @@
 
 void Background::defaultBehavior(Entity* e)
 {
+	//simply draw the background
 	static_cast<Background*>(e)->draw();
 }
 
 void Background::draw() {
-	//we only want to implement the draw if the background has data
-	if (!this->empty()) {
+	//we only want to implement the draw if the background has data and we want to draw it
+	if (!this->empty() && this->visible) {
 		//these values determine whether or not to use the renderer or custom values
 		int drawToX, drawToY, drawToW, drawToH;
 		//these values determine whether or not to use the image's original height and width
@@ -154,26 +155,37 @@ void Background::draw() {
 }
 
 void Background::flipX() {
+	//toggle a flip against the X axis
 	if (this->toggleFlipX == false)
 		this->toggleFlipX = true;
 	else this->toggleFlipX = false;
 }
 
 void Background::flipY() {
+	//toggle a flip against the y axis
 	if (this->toggleFlipY == false)
 		this->toggleFlipY = true;
 	else this->toggleFlipY = false;
 }
 
 void Background::setRotation(int angle) {
-	this->rotation = angle;
+	//adjust the angle of rotation so that it is valid
+	while (angle > 360){ //decrease the angle of rotation until it is valid
+		angle -= 360;
+	}
+	while ( angle < 0){
+		angle += 360; //increase the angle of rotation until it is valid
+	}
+	this->rotation = angle; //now that the angle is valid, set the rotation variable to the angle
 }
 
 void Background::setToRenderSize() {
+	//set the background to the size of the renderer
 	this->toRenderer= true;
 }
 
 void Background::detachFromRenderer() {
+	//set the background to its own values
 	this->toRenderer = false;
 }
 
@@ -202,6 +214,7 @@ void Background::setSize(unsigned int w, unsigned int h) {
 }
 
 void Background::execute() {
+	//execute the behavior stored within the background
 	this->storedBehavior(this);
 }
 

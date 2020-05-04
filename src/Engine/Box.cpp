@@ -31,10 +31,12 @@ void Box::setPosition(int x, int y){
 	this->y = y;
 }
 
-void Box::setSize(unsigned int w, unsigned int h){
-	//the width and height are only valid if unsigned
-	this->w = w; //set the variables appropriately
-	this->h = h;
+void Box::setSize(int w, int h){
+	//the width and height are only valid if not negative
+	if (w > 0 && h > 0){
+		this->w = w; //set the variables appropriately
+		this->h = h;
+	}
 }
 
 void Box::modifyColor(Uint8 r, Uint8 g, Uint8 b){
