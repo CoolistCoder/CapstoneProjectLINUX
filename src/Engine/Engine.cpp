@@ -94,6 +94,15 @@ void Engine::init(){
 void Engine::end(){
 	//this occurs at the end of the engine's run
 	//once finished, the engine needs to be able to free all of its elements
+
+	//we need to clean out any joysticks
+	if (!this->alljoysticks.empty()){
+		//if we have any joysticks
+		for (unsigned int i=0; i<alljoysticks.size(); i++){
+			delete alljoysticks[i]; //delete the active joysticks
+		}
+	}
+
 	//Close open audio channels
 	Mix_CloseAudio();
 
