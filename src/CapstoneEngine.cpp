@@ -41,7 +41,8 @@ int main(int, char**) {
 	testtext2->setSize(10,10); //set text 2's size
 	testtext2->setPosition(0,0); //set text 2's position
 
-
+	//create a simple demo sprite
+	titleScene->addEntity(new Player);
 
 
 	//set up the loops
