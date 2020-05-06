@@ -33,12 +33,12 @@ int main(int, char**) {
 	gameScene->addEntity(testtext2); //add the text to the game
 
 	//set the attributes for both text objects
-	testtext1->setString("This is the title screen");
-	testtext1->setSize(10,10);
-	testtext1->setPosition(0,0);
-	testtext2->setString("This is the game screen");
-	testtext2->setSize(10,10);
-	testtext2->setPosition(0,0);
+	testtext1->setString("This is the title screen"); //set text 1's string
+	testtext1->setSize(10,10); //set text 1's size
+	testtext1->setPosition(0,0); //set text 1's position
+	testtext2->setString("This is the game screen"); //set text 2's string
+	testtext2->setSize(10,10); //set text 2's size
+	testtext2->setPosition(0,0); //set text 2's position
 
 	//set up the loops
 

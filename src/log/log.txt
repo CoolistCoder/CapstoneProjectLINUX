@@ -78,3 +78,10 @@ the dedication it took to go about a project of this scope.
 	now I must possibly spend a week modeling this issue.  I may just ignore it and move on, or I may create a dedicated
 	function for positioning the camera to the center of an object.  I'm sure that it is correctable, but this could limit
 	the camera's ability to chase an object.
+	
+5/5/20
+	The third milestone has been submitted and I am moving onto the final portion of the project.  I must write the 
+	report and the game code, Steven is responsible for documentation and possibly the engine diagram.  I must convene
+	with him on that.  The game has been started, I got a rudimentary idea implemented, now I must put in the game logic
+	and make sure everything is functional.  We're too far to fail now, I will be sure to put in all the effort I have
+	been saving up for this moment.
