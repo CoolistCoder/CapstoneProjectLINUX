@@ -26,7 +26,35 @@ int main(int, char**) {
 	Scene* gameScene = new Scene(gameEngine);
 
 	//use some text to see if the program works
+	Text* testtext1 = new Text;
+	Text* testtext2 = new Text;
 
+	titleScene->addEntity(testtext1); //add the text to the title
+	gameScene->addEntity(testtext2); //add the text to the game
+
+	//set the attributes for both text objects
+	testtext1->setString("This is the title screen");
+	testtext1->setSize(10,10);
+	testtext1->setPosition(0,0);
+	testtext2->setString("This is the game screen");
+	testtext2->setSize(10,10);
+	testtext2->setPosition(0,0);
+
+	//set up the loops
+
+	//the title loop:
+	//while the return key is not pressed or the engine is still active
+	while (gameEngine->getRunning() && !Engine::getKey(SDL_SCANCODE_RETURN)){
+		//run the title sequence
+		//if any of these are broken, we progress to the game screen
+		titleScene->execute(); //we execute the title sequence
+	}
+
+	//once the title sequence has been completed, we go into the actual game
+	while (gameEngine->getRunning()){
+		//run the game sequence
+		gameScene->execute();
+	}
 
 
 	//delete the scenes in reverse order from which they appeared
@@ -37,9 +65,5 @@ int main(int, char**) {
 
 	return 0;
 }
-
-
-
-
 
 
