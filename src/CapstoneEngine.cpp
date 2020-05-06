@@ -8,6 +8,7 @@ using namespace std;
 
 //we only need to include the Engine.h file
 #include "Engine/CapstoneEngine.h"
+#include "game/LaserAvenger.h"
 
 //Define commandline parameters for SDL2
 int main(int, char**) {
@@ -39,6 +40,9 @@ int main(int, char**) {
 	testtext2->setString("This is the game screen"); //set text 2's string
 	testtext2->setSize(10,10); //set text 2's size
 	testtext2->setPosition(0,0); //set text 2's position
+
+
+
 
 	//set up the loops
 
