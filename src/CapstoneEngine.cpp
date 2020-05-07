@@ -43,7 +43,7 @@ int main(int, char**) {
 
 	//create our sprite and add it to the title sequence
 	Player* playerone = new Player;
-	titleScene->addEntity(playerone);
+	gameScene->addEntity(playerone);
 
 	//create the walls needed for the game
 	int walls[] = {
@@ -66,7 +66,7 @@ int main(int, char**) {
 	};
 
 	Tilemap* walltiles = new Tilemap;
-	titleScene->addEntity(walltiles);
+	gameScene->addEntity(walltiles);
 	walltiles->loadImage("setpieces.png");
 	walltiles->createMap(walls, 20 * 16);
 	walltiles->setSize(20, 16);
