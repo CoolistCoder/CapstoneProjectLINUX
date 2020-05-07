@@ -49,6 +49,7 @@ public:
 	bool collideAgainst(int, int); //check to see if a point is colliding with this tile
 	bool collideAgainst(int, int, int, int); //check to see if a box-like entity is colliding with this tile
 	bool rendererCollision(); //check to see if tile is within renderer
+	bool isFrame(int); //returns what frame the tile is currently using
 
 	void draw(); //the draw function for the tile
 

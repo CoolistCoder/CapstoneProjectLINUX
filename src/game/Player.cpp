@@ -2,6 +2,9 @@
 #include "Player.h"
 
 void Player::control(Entity* p){
+	//make the player a fleshy color
+	static_cast<Player*>(p)->modifyColor(255, 203, 209);
+
 	//set the player's frame to 0
 	static_cast<Player*>(p)->setFrame(0);
 
@@ -26,11 +29,56 @@ void Player::control(Entity* p){
 		static_cast<Player*>(p)->setFrame(3);
 	}
 
+	//we need to check against all walls.  If the player knows it has walls, we need to die when we collide with them
+	if (static_cast<Player*>(p)->walls){
+		//if the player knows about the walls
+		for (unsigned int i=0; i<static_cast<Player*>(p)->walls->tileQuantity(); i++){
+			//check each tile to see if a collision has occured
+			if (static_cast<Player*>(p)->walls->getTile(i)->collideAgainst(static_cast<Player*>(p)) &&
+					static_cast<Player*>(p)->walls->getTile(i)->isFrame(1)){
+				//this determines whether or not the player is colliding with a tile that happens to be a wall
+				static_cast<Player*>(p)->setBehavior(Player::die); //make it die
+			}
+		}
+	}
+
 	//now draw the player
 	static_cast<Player*>(p)->draw();
 }
 
 void Player::die(Entity* p){
+	static_cast<Player*>(p)->modifyColor(255,255,0);
+
+	static int waitstatic = 0;
+	waitstatic++;
+	if (waitstatic > 2){
+		//we need to make the player electrocute and restart
+		if (static_cast<Player*>(p)->frame != 0 && static_cast<Player*>(p)->frame != 4){
+			//if the frame of the sprite is neither 1 or 5
+			//we want to set it to 0
+			static_cast<Player*>(p)->frame = 0;
+		}
+		else{
+			//if the frame is 1 or 5 we want to alternate between them
+			if (static_cast<Player*>(p)->frame == 0){
+				static_cast<Player*>(p)->frame = 4;
+			}
+			else{
+				static_cast<Player*>(p)->frame = 0;
+			}
+		}
+		waitstatic = 0;
+	}
+
+
+	static_cast<Player*>(p)->draw();
+
+	//increment waittime until it reaches the point it needs to be at
+	static_cast<Player*>(p)->waittime++;
+	if (static_cast<Player*>(p)->waittime > static_cast<Player*>(p)->deathwait){
+		static_cast<Player*>(p)->waittime = 0; //the waittime is reset
+		static_cast<Player*>(p)->setBehavior(Player::setup); //reset the object
+	}
 
 }
 
@@ -135,6 +183,12 @@ void Player::moveRight(){
 	this->setPosition(this->x, this->y);
 }
 
+void Player::wallIs(Tilemap* w){
+	if (w){
+		this->walls = w; //give the player the wall data if it is valid
+	}
+}
+
 void Player::execute(){
 	//execute the stored behavior
 	this->storedBehavior(this);
@@ -147,6 +201,13 @@ Player::Player() {
 
 	this->walkDelayTimer = 0;
 	this->walkFrame = 1;
+
+	//starting off, we have no data
+	this->walls = nullptr;
+	this->laser = nullptr;
+
+	//we haven't died yet so waittime is 0
+	this->waittime = 0;
 
 }
 

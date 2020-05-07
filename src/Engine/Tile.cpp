@@ -134,6 +134,11 @@ bool Tile::rendererCollision() {
 	return false; //do not draw if no engine is present!!!!
 }
 
+bool Tile::isFrame(int frame_at){
+	//simply return whether or not the frame is the specified value
+	return (frame_at == this->frame);
+}
+
 void Tile::draw() {
 	//we only want to implement the draw if the tile has data
 	if (!this->empty() && this->rendererCollision()) {

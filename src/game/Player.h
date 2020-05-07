@@ -22,6 +22,8 @@ private:
 	const int walkDelayMax = 5; //determines how long the frames must wait before the walk cycle
 	int walkDelayTimer; //the delay timer
 	int walkFrame; //the actual frame
+	const int deathwait = 50; //the amount of time the player must wait once dead
+	int waittime; //the amount of time that has elapsed since death
 
 
 public:
@@ -29,6 +31,8 @@ public:
 	void moveUp(); //moves the player up
 	void moveLeft(); //moves the player left
 	void moveRight(); //moves the player right
+
+	void wallIs(Tilemap*); //gives the player the wall info
 
 	void execute(); //execute the stored behavior
 

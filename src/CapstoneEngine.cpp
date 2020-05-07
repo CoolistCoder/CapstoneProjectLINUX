@@ -41,9 +41,40 @@ int main(int, char**) {
 	testtext2->setSize(10,10); //set text 2's size
 	testtext2->setPosition(0,0); //set text 2's position
 
-	//create a simple demo sprite
-	titleScene->addEntity(new Player);
+	//create our sprite and add it to the title sequence
+	Player* playerone = new Player;
+	titleScene->addEntity(playerone);
 
+	//create the walls needed for the game
+	int walls[] = {
+			1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1, //x20
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,
+			1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 //x16
+	};
+
+	Tilemap* walltiles = new Tilemap;
+	titleScene->addEntity(walltiles);
+	walltiles->loadImage("setpieces.png");
+	walltiles->createMap(walls, 20 * 16);
+	walltiles->setSize(20, 16);
+	walltiles->frameCount(4,1);
+	walltiles->tileSize(24,16);
+
+	//give the player the walls
+	playerone->wallIs(walltiles);
 
 	//set up the loops
 
