@@ -8,6 +8,9 @@ void Player::control(Entity* p){
 	//set the player's frame to 0
 	static_cast<Player*>(p)->setFrame(0);
 
+	//allow the player to run
+	static_cast<Player*>(p)->run();
+
 	//make sure the fire key isn't being pressed
 	if (!Engine::getKey(SDL_SCANCODE_LCTRL)){
 		//make the player move around
@@ -171,7 +174,7 @@ void Player::moveDown(){
 	this->setFrame(walkFrame); //set this to the walkframe
 
 	//just move and update the position
-	this->y++;
+	this->y += this->speed;
 	this->setPosition(this->x, this->y);
 }
 
@@ -190,7 +193,7 @@ void Player::moveUp(){
 	}
 	this->setFrame(walkFrame); //set this to the walkframe
 	//just move and update the position
-	this->y--;
+	this->y -= this->speed;;
 	this->setPosition(this->x, this->y);
 
 }
@@ -218,7 +221,7 @@ void Player::moveLeft(){
 	this->activateHorizontalFlip();
 
 	//just move and update the position
-	this->x--;
+	this->x -= this->speed;;
 	this->setPosition(this->x, this->y);
 
 }
@@ -282,8 +285,23 @@ void Player::moveRight(){
 	this->deactivateHorizontalFlip();
 
 	//just move and update the position
-	this->x++;
+	this->x += this->speed;;
 	this->setPosition(this->x, this->y);
+}
+
+void Player::kill(){
+	//just set the behavior to die
+	this->setBehavior(Player::die);
+}
+
+void Player::run(){
+	//if the shift key is held, the player will run
+	if (Engine::getKey(SDL_SCANCODE_LSHIFT)){
+		this->speed = 3;
+	}
+	else{
+		this->speed = 1;
+	}
 }
 
 void Player::wallIs(Tilemap* w){
@@ -327,6 +345,8 @@ Player::Player() {
 	this->fired = false;
 
 	this->savedDirection = true;
+
+	this->speed = 1;
 
 }
 

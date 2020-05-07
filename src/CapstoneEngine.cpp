@@ -76,6 +76,11 @@ int main(int, char**) {
 	//give the player the walls
 	playerone->wallIs(walltiles);
 
+	//create an enemy
+	Enemy* mainEnemy = new Enemy;
+	mainEnemy->givePlayer(playerone);
+	gameScene->addEntity(mainEnemy);
+
 	//set up the loops
 
 	//the title loop:

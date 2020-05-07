@@ -29,10 +29,10 @@ private:
 	bool laserLeft; //this is a value that determines how the laser moves
 	bool laserRight; //this is a value that determines how the laser moves
 	int laserX, laserY; //this is the position of the laser
-	int laserStartX, laserStartY;
-	bool fired;
+	int laserStartX, laserStartY; //the starting position of the laser
+	bool fired; //determines whether or not a laser has been fired
 	bool savedDirection; //left is false, right is true
-
+	int speed; //the speed of the player
 
 public:
 	void moveDown(); //moves the player down
@@ -40,6 +40,10 @@ public:
 	void moveLeft(); //moves the player left
 	void moveRight(); //moves the player right
 	void shootLaser(); //shoots a laser
+	void kill(); //kills the player, used by enemies
+	void run(); //makes the player run if the shift key is held
+	int getLaserX() { return this->laserX; }; //returns the laser's x position
+	int getLaserY() { return this->laserY; }; //returns the laser's y position
 
 	void wallIs(Tilemap*); //gives the player the wall info
 
