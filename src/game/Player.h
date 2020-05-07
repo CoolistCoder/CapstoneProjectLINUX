@@ -25,12 +25,21 @@ private:
 	const int deathwait = 50; //the amount of time the player must wait once dead
 	int waittime; //the amount of time that has elapsed since death
 
+	//laser values
+	bool laserLeft; //this is a value that determines how the laser moves
+	bool laserRight; //this is a value that determines how the laser moves
+	int laserX, laserY; //this is the position of the laser
+	int laserStartX, laserStartY;
+	bool fired;
+	bool savedDirection; //left is false, right is true
+
 
 public:
 	void moveDown(); //moves the player down
 	void moveUp(); //moves the player up
 	void moveLeft(); //moves the player left
 	void moveRight(); //moves the player right
+	void shootLaser(); //shoots a laser
 
 	void wallIs(Tilemap*); //gives the player the wall info
 

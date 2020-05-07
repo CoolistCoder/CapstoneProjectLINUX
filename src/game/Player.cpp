@@ -27,6 +27,8 @@ void Player::control(Entity* p){
 	else{
 		//TODO perform the fire
 		static_cast<Player*>(p)->setFrame(3);
+		//we need the player to have the ability to make lasers
+		static_cast<Player*>(p)->shootLaser();
 	}
 
 	//we need to check against all walls.  If the player knows it has walls, we need to die when we collide with them
@@ -41,6 +43,61 @@ void Player::control(Entity* p){
 			}
 		}
 	}
+
+	const int laserspeed = 8; //the speed of the laser
+
+
+	//fire the laser!
+	if (static_cast<Player*>(p)->fired){
+		if (!static_cast<Player*>(p)->savedDirection){ //if the laser is supposed to go left
+			static_cast<Player*>(p)->laser->setLinePosition(
+					static_cast<Player*>(p)->laserStartX,
+					static_cast<Player*>(p)->laserStartY,
+					static_cast<Player*>(p)->laserX + static_cast<Player*>(p)->w,
+					static_cast<Player*>(p)->laserY
+			);
+
+			static_cast<Player*>(p)->laserStartX-=laserspeed;
+			static_cast<Player*>(p)->laserX-=laserspeed;
+		}
+		else{ //if the laser is supposed to go right
+			static_cast<Player*>(p)->laser->setLinePosition(
+					static_cast<Player*>(p)->laserStartX,
+					static_cast<Player*>(p)->laserStartY,
+					static_cast<Player*>(p)->laserX + static_cast<Player*>(p)->w,
+					static_cast<Player*>(p)->laserY
+			);
+
+			static_cast<Player*>(p)->laserStartX+=laserspeed;
+			static_cast<Player*>(p)->laserX+=laserspeed;
+
+
+		}
+
+		//check if a wall collision was made
+		if (static_cast<Player*>(p)->walls){
+			//if the player knows about the walls
+			for (unsigned int i=0; i<static_cast<Player*>(p)->walls->tileQuantity(); i++){
+				//check each tile to see if a collision has occured
+				if (static_cast<Player*>(p)->walls->getTile(i)->collideAgainst(static_cast<Player*>(p)->laserStartX, static_cast<Player*>(p)->laserStartY) &&
+						static_cast<Player*>(p)->walls->getTile(i)->isFrame(1)){
+					//this determines whether or not the player is colliding with a tile that happens to be a wall
+					static_cast<Player*>(p)->fired = false;
+				}
+			}
+		}
+
+		static_cast<Player*>(p)->laser->execute();
+	}
+	else{
+		static_cast<Player*>(p)->laser->setLinePosition(-1,-1,-1,-1);
+		static_cast<Player*>(p)->laserX = 0;
+		static_cast<Player*>(p)->laserY = 0;
+		static_cast<Player*>(p)->laserStartX = 0;
+		static_cast<Player*>(p)->laserStartY = 0;
+	}
+
+
 
 	//now draw the player
 	static_cast<Player*>(p)->draw();
@@ -68,6 +125,8 @@ void Player::die(Entity* p){
 			}
 		}
 		waitstatic = 0;
+		//make the laser reset too
+		static_cast<Player*>(p)->fired = false;
 	}
 
 
@@ -151,12 +210,52 @@ void Player::moveLeft(){
 	}
 	this->setFrame(walkFrame); //set this to the walkframe
 
+		//make the player laser face left
+		this->laserLeft = true;
+		this->laserRight = false;
+
 	//make sure to mirror properly
 	this->activateHorizontalFlip();
 
 	//just move and update the position
 	this->x--;
 	this->setPosition(this->x, this->y);
+
+}
+
+void Player::shootLaser(){
+	//create a laser!
+	//if a laser is not present we want to allow the player to create one
+	if (!this->fired){
+		this->fired = true; //make the laser fire!
+
+		//check the direction
+		if (this->laserLeft){
+			this->savedDirection = false; //it goes left
+		}
+		else if (this->laserRight){
+			this->savedDirection = true; //it goes right
+		}
+
+		//the starting positions rely on the direction
+		if (this->savedDirection){ //make the laser move right from the palm
+			this->laserX = this->x + 11;
+			this->laserY = this->y + 5;
+			this->laserStartX = this->x + 11;
+			this->laserStartY = this->y + 5;
+			this->laser->setLinePosition(this->x, this->y, this->x + this->w, this->y);
+		}
+		else{ //make the laser move left from the palm
+			this->laserX = this->x - 11;
+			this->laserY = this->y + 5;
+			this->laserStartX = this->x - 11;
+			this->laserStartY = this->y + 5;
+			this->laser->setLinePosition(this->x, this->y, this->x + this->w, this->y);
+		}
+
+
+
+	}
 
 }
 
@@ -174,6 +273,10 @@ void Player::moveRight(){
 		walkDelayTimer = 0;
 	}
 	this->setFrame(walkFrame); //set this to the walkframe
+
+		//make the player laser face right
+		this->laserRight = true;
+		this->laserLeft = false;
 
 	//make sure to mirror properly
 	this->deactivateHorizontalFlip();
@@ -209,9 +312,30 @@ Player::Player() {
 	//we haven't died yet so waittime is 0
 	this->waittime = 0;
 
+	//laser values are defaulted
+	this->laserLeft = false;
+	this->laserRight = true; //by default the player faces right
+	this->laserX = 0;
+	this->laserY = 0;
+	this->laserStartX = this->x;
+	this->laserStartY = this->y;
+
+	this->laser = new Line;
+	this->laser->setEngine(this->getEngine()); //make sure the laser has everything we need
+	this->laser->setLinePosition(-1, -1, -1, -1); //simply make the laser as long as the player
+	this->laser->modifyColor(255,0,0); //make the laser red
+	this->fired = false;
+
+	this->savedDirection = true;
+
 }
 
 Player::~Player() {
 	// TODO Auto-generated destructor stub
+
+	//we need to make sure to delete any lasers that are present
+	if (this->laser!=nullptr){
+		delete this->laser;
+	}
 }
 
