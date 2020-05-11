@@ -85,3 +85,7 @@ the dedication it took to go about a project of this scope.
 	with him on that.  The game has been started, I got a rudimentary idea implemented, now I must put in the game logic
 	and make sure everything is functional.  We're too far to fail now, I will be sure to put in all the effort I have
 	been saving up for this moment.
+	
+5/11/20
+	With the final updates being implemented, we're trying to figure out a few last minute bugs.  It seems something is up
+	with the image library and I must tend to that.  The report is mostly complete and all's going well.

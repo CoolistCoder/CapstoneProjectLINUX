@@ -41,7 +41,7 @@ void Tilemap::setPosition(int x, int y){
 }
 
 void Tilemap::drawmap() {
-    if (this->getEngine()) { //Check to see if we have a valid engine FIRST
+    if (this->getEngine() && !this->empty()) { //Check to see if we have a valid engine FIRST
         //go through each tile stored in our vector and draw it
         for (unsigned int i = 0; i < this->tiles.size(); i++) {
             this->tiles[i]->setPosition
