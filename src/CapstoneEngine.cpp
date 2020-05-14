@@ -10,6 +10,9 @@ using namespace std;
 #include "Engine/CapstoneEngine.h"
 #include "game/LaserAvenger.h"
 
+//set the behaviors for non-game-specific objects
+void titleCameraBehavior(Entity*);
+
 //Define commandline parameters for SDL2
 int main(int, char**) {
 	//create the game engine and set the values we want for the game engine
@@ -34,9 +37,9 @@ int main(int, char**) {
 	gameScene->addEntity(testtext2); //add the text to the game
 
 	//set the attributes for both text objects
-	testtext1->setString("This is the title screen"); //set text 1's string
+	testtext1->setString("Press ENTER to start"); //set text 1's string
 	testtext1->setSize(10,10); //set text 1's size
-	testtext1->setPosition(0,0); //set text 1's position
+	testtext1->setPosition(55,20); //set text 1's position
 	testtext2->setString("This is the game screen"); //set text 2's string
 	testtext2->setSize(10,10); //set text 2's size
 	testtext2->setPosition(0,0); //set text 2's position
@@ -65,13 +68,14 @@ int main(int, char**) {
 			1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1 //x16
 	};
 
-	Tilemap* walltiles = new Tilemap;
-	gameScene->addEntity(walltiles);
-	walltiles->loadImage("setpieces.png");
-	walltiles->createMap(walls, 20 * 16);
-	walltiles->setSize(20, 16);
-	walltiles->frameCount(4,1);
-	walltiles->tileSize(24,16);
+	//create the tiles that the player will need to avoid
+	Tilemap* walltiles = new Tilemap; //instantiate the walls
+	gameScene->addEntity(walltiles); //add the walls to the engine
+	walltiles->loadImage("setpieces.png"); //load an image for the walls
+	walltiles->createMap(walls, 20 * 16); //generate the map we need for the tiles
+	walltiles->setSize(20, 16); //set the size of the map
+	walltiles->frameCount(4,1); //the map uses a tileset that is 1 down and 4 across
+	walltiles->tileSize(24,16); //the tiles on the map are 24 pixels across and 16 pixels down
 
 	//give the player the walls
 	playerone->wallIs(walltiles);
@@ -80,6 +84,22 @@ int main(int, char**) {
 	Enemy* mainEnemy = new Enemy;
 	mainEnemy->givePlayer(playerone);
 	gameScene->addEntity(mainEnemy);
+
+	//create a camera for the title sequence
+	Camera* titlecamera = new Camera;
+	titleScene->addEntity(titlecamera); //add the camera to the title
+	titleScene->setActiveCamera(titlecamera);
+	titlecamera->sizeToRenderer(); //set the camera's size to the render area
+	titlecamera->setBehavior(titleCameraBehavior);
+
+	//create the background for the title screen
+	Background* title = new Background;
+	titleScene->addEntity(title); //add the title graphic to the title sequence
+	title->loadImage("LaserAvenger.jpg"); //load the title graphic
+	title->setPosition(320,0); //set the background far to the right
+	title->setSize(320,240); //make the size of the background equal to the size of the graphic
+	title->setPriority(1);
+
 
 	//set up the loops
 
@@ -90,7 +110,7 @@ int main(int, char**) {
 		//if any of these are broken, we progress to the game screen
 		titleScene->execute(); //we execute the title sequence
 	}
-
+	delete titleScene; //delete the title
 	//once the title sequence has been completed, we go into the actual game
 	while (gameEngine->getRunning()){
 		//run the game sequence
@@ -98,13 +118,27 @@ int main(int, char**) {
 	}
 
 
-	//delete the scenes in reverse order from which they appeared
 	delete gameScene;
-	delete titleScene;
+
 
 	delete gameEngine; //delete the game engine
 
 	return 0;
+}
+
+void titleCameraBehavior(Entity* c){
+	//first, cast the entity to a camera object
+	Camera* temp = static_cast<Camera*>(c);
+	//now, make the camera move left a few steps
+
+	static int waitx = 0;
+	const int waitlimit = 320;
+
+	if (waitx < waitlimit){
+		waitx++;
+	}
+	temp->focusTo(waitx, 0); //make the camera move to the side
+
 }
 
 

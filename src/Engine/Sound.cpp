@@ -185,6 +185,7 @@ Sound::Sound() {
 
 Sound::~Sound() {
 	// TODO Auto-generated destructor stub
+	this->stop(); //make sure sound isn't playing
 	if (this->storedSound){ //if we have sound data, we just need to free it
 		Mix_FreeChunk(this->storedSound);
 	}
