@@ -12,6 +12,7 @@ using namespace std;
 
 //set the behaviors for non-game-specific objects
 void titleCameraBehavior(Entity*);
+void musicBehavior(Entity*);
 
 //Define commandline parameters for SDL2
 int main(int, char**) {
@@ -106,6 +107,14 @@ int main(int, char**) {
 	title->setSize(320,240); //make the size of the background equal to the size of the graphic
 	title->setPriority(1);
 
+	//create the music for the game sequence
+	Sound* gameMusic = new Sound;
+	gameScene->addEntity(gameMusic);
+	gameMusic->loadMusic("robomb.wav");
+	gameMusic->setVolume(40);
+	gameMusic->setBehavior(musicBehavior);
+
+
 
 	//set up the loops
 
@@ -145,6 +154,11 @@ void titleCameraBehavior(Entity* c){
 	}
 	temp->focusTo(waitx, 0); //make the camera move to the side
 
+}
+
+void musicBehavior(Entity* m){
+	Sound* temp = static_cast<Sound*>(m);
+	temp->play();
 }
 
 

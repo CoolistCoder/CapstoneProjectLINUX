@@ -6,6 +6,7 @@
 #include "../Engine/Tilemap.h"
 #include "../Engine/Line.h"
 #include "../Engine/Text.h"
+#include "../Engine/Sound.h"
 
 class Player : public Sprite{
 private:
@@ -17,6 +18,8 @@ private:
 	//we need to have a few pointers to keep track of things
 	Line* laser; //the laser projectile the player will launch
 	Tilemap* walls; //the walls that the player must be aware of
+	Sound* lasersound; //the sound the player makes when a laser is fired
+	Sound* deathsound; //the sound the player makes when dying
 
 	//animation values
 	const int walkDelayMax = 5; //determines how long the frames must wait before the walk cycle
