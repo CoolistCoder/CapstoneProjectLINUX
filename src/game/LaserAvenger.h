@@ -3,7 +3,7 @@
 #define GAME_LASERAVENGER_H_
 #include "Player.h"
 #include "Enemy.h"
-
+#include "Score.h"
 
 
 

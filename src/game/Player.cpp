@@ -139,6 +139,7 @@ void Player::die(Entity* p){
 	static_cast<Player*>(p)->waittime++;
 	if (static_cast<Player*>(p)->waittime > static_cast<Player*>(p)->deathwait){
 		static_cast<Player*>(p)->waittime = 0; //the waittime is reset
+		static_cast<Player*>(p)->score--; //remove 1 from the score
 		static_cast<Player*>(p)->setBehavior(Player::setup); //reset the object
 	}
 
@@ -348,6 +349,8 @@ Player::Player() {
 
 	this->speed = 1;
 
+	//default score values
+	this->score = 0;
 }
 
 Player::~Player() {

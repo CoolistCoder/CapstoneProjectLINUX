@@ -31,22 +31,26 @@ int main(int, char**) {
 
 	//use some text to see if the program works
 	Text* testtext1 = new Text;
-	Text* testtext2 = new Text;
-
 	titleScene->addEntity(testtext1); //add the text to the title
-	gameScene->addEntity(testtext2); //add the text to the game
 
 	//set the attributes for both text objects
 	testtext1->setString("Press ENTER to start"); //set text 1's string
 	testtext1->setSize(10,10); //set text 1's size
 	testtext1->setPosition(55,20); //set text 1's position
-	testtext2->setString("This is the game screen"); //set text 2's string
-	testtext2->setSize(10,10); //set text 2's size
-	testtext2->setPosition(0,0); //set text 2's position
 
 	//create our sprite and add it to the title sequence
 	Player* playerone = new Player;
 	gameScene->addEntity(playerone);
+	playerone->setPriority(3);
+
+	//create a scoreboard for the player
+	Score* playerScore = new Score;
+	gameScene->addEntity(playerScore);
+	playerScore->setPosition(0,15);
+	playerScore->setSize(16,16);
+	playerScore->setPriority(0);
+	playerScore->givePlayer(playerone); //give the score a player to track
+
 
 	//create the walls needed for the game
 	int walls[] = {
@@ -76,6 +80,7 @@ int main(int, char**) {
 	walltiles->setSize(20, 16); //set the size of the map
 	walltiles->frameCount(4,1); //the map uses a tileset that is 1 down and 4 across
 	walltiles->tileSize(24,16); //the tiles on the map are 24 pixels across and 16 pixels down
+	walltiles->setPriority(2);
 
 	//give the player the walls
 	playerone->wallIs(walltiles);
@@ -84,6 +89,7 @@ int main(int, char**) {
 	Enemy* mainEnemy = new Enemy;
 	mainEnemy->givePlayer(playerone);
 	gameScene->addEntity(mainEnemy);
+	mainEnemy->setPriority(4);
 
 	//create a camera for the title sequence
 	Camera* titlecamera = new Camera;

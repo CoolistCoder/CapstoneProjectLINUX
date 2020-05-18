@@ -5,9 +5,9 @@
 #include "../Engine/Sprite.h"
 #include "../Engine/Tilemap.h"
 #include "../Engine/Line.h"
+#include "../Engine/Text.h"
 
 class Player : public Sprite{
-private:
 private:
 	//we need behaviors that reflect the state the player is in
 	static void control(Entity*); //this is the normal control state
@@ -34,6 +34,8 @@ private:
 	bool savedDirection; //left is false, right is true
 	int speed; //the speed of the player
 
+	int score; //the score of the player
+
 public:
 	void moveDown(); //moves the player down
 	void moveUp(); //moves the player up
@@ -44,6 +46,9 @@ public:
 	void run(); //makes the player run if the shift key is held
 	int getLaserX() { return this->laserX; }; //returns the laser's x position
 	int getLaserY() { return this->laserY; }; //returns the laser's y position
+
+	void updateScore(int u) { this->score+=u; }; //updates the player's score
+	int getScore() { return this->score; }; //returns the player's score
 
 	void wallIs(Tilemap*); //gives the player the wall info
 
