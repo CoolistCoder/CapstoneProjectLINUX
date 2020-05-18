@@ -114,6 +114,11 @@ int main(int, char**) {
 	gameMusic->setVolume(40);
 	gameMusic->setBehavior(musicBehavior);
 
+	//create a wide box to hide the bottom of the screen
+	Box* hidebox = new Box;
+	gameScene->addEntity(hidebox);
+	hidebox->setPosition(0,255);
+	hidebox->setSize(600,16);
 
 
 	//set up the loops

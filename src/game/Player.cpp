@@ -301,10 +301,10 @@ void Player::kill(){
 void Player::run(){
 	//if the shift key is held, the player will run
 	if (Engine::getKey(SDL_SCANCODE_LSHIFT)){
-		this->speed = 3;
+		this->speed = 5;
 	}
 	else{
-		this->speed = 1;
+		this->speed = 3;
 	}
 }
 
